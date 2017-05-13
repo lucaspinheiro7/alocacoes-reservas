@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Sistema Gerenciador de Alocações e Reservas</title>
+	<!-- Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Materialize CSS -->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+    <!-- Custom CSS -->
+    <link type="text/css" rel="stylesheet" href="../css/custom-page.css"  media="screen,projection"/>
+</head>
+<body>
+	<header id="cabecalho">
+		<div class="row remove-margin">
+			<div class="col s12">
+				<img class="responsive-img" src="../img/logo-fametro.jpg">
+			</div>
+		</div>
+		<!-- Estrutura Dropdown para Tablets e Desktops -->
+		<ul id="dropdown1" class="dropdown-custom">
+		  	<li><a href="">Reservar</a></li>
+		  	<li><a href="">Minhas Reservas</a></li>
+		</ul>
+		<!-- Estrutura Dropdown para dispositivos Móveis -->
+		<ul id="dropdown2" class="dropdown-content-mobile">
+		  	<li><a href="">Reservar</a></li>
+		 	<li><a href="">Minhas Reservas</a></li>
+		</ul>
+		<nav class="green darken-custom">
+			<div class="nav-wrapper">
+			    <a href="" class="brand-logo resize">Bem-Vindo, Usuário!</a>
+			    <a href="#" data-activates="menu-mobile" class="button-collapse"><i class="material-icons">menu</i>
+			    <!-- Menu para Desktops -->
+			    <ul id="nav-mobile" class="right hide-on-med-and-down">
+			      	<li><a class="itens-resize itens-width" href="">Início</a></li>
+			      	<!-- Dropdown Trigger para Desktops -->
+		      		<li class="active itens-even"><a class="dropdown-button itens-resize indicator" href="" data-activates="dropdown1">Reservas
+		      		<i class="material-icons right">arrow_drop_down</i></a></li>
+			     	<li><a class="itens-resize itens-width" href="">Salas</a></li>
+			      	<li><a class="itens-resize itens-width" href="">Turmas</a></li>
+			      	<li><a class="itens-resize logout-width" href="">Sair</a></li>
+			    </ul>
+			    <!-- Menu para Tables e Dispositivos Móveis -->
+			    <ul id="menu-mobile" class="side-nav">
+			      	<li><a href="">Início</a></li>
+			      	<!-- Dropdown Trigger para Tablets e dispositivos Móveis-->
+		      		<li  class="active"><a class="dropdown-button" href="" data-activates="dropdown2">Reservas
+		      		<i class="material-icons right">arrow_drop_down</i></a></li>
+			     	<li><a  href="">Salas</a></li>
+			      	<li><a  href="">Turmas</a></li>
+			      	<li><a  href="">Sair</a></li>
+			    </ul>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<!-- Breadcrumb -->
+		<nav class="transparent-bg">
+			    <div class="row margin10">
+			      	<div class="col s12">
+				        <a href="#!" class="breadcrumb green-darken-6">Reservas</a>
+				        <a href="#!" class="breadcrumb green-darken-6">Minhas Reservas</a>
+			      	</div>
+			    </div>
+		  	</nav>
+		<div class="row">
+
+		<!-- Caso não haja nenhuma reserva -->
+				<label class="col s12 m6 offset-m3 l6 offset-l3 dynamic-label"> Nenhuma Reserva feita até o momento </label>
+
+			<!-- Caso haja alguma Reserva
+
+			<div class="col s11 offset-m1 offset-m1">
+
+				<table class="col s12 m4 l2 margin20">
+					<form action="" method="">
+						<thead class="remove-border"> 
+							<tr>
+								<td>
+									<img class="responsive-img" src="../img/sala.jpg">		
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+						  	<tr>
+						       	<td>
+						       		<div class="col s12">
+										<label class="col s12 dynamic-label">SALA 100</label>
+									</div>
+										<label class="col s12 dynamic-label">Reserva: <label class="dynamic-label-red">05/06/2017</label></label>		
+								</td>
+							</tr>
+						</tbody>
+					</form>
+				</table>
+
+			  -->
+
+			</div>
+		</div>
+	</main>
+	<footer class="page-footer grey lighten-1">
+       	<div class="footer-copyright green darken-5">
+            <div class="container">
+           		<p>©2017 Sistema Gerenciador de Alocações e Reservas</p>
+            </div>
+        </div>
+    </footer>
+	<!-- JQuery -->
+	<script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
+	<!-- Materialize JS -->
+	<script type="text/javascript" src="../js/materialize.min.js"></script>
+	<script type="text/javascript">
+		//Menu Mobile
+		 $(".button-collapse").sideNav();
+	</script>
+</body>
+</html>

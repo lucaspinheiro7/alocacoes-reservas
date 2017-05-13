@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Sistema Gerenciador de Alocações e Reservas</title>
+	<!-- Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Materialize CSS -->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+    <!-- Custom CSS -->
+    <link type="text/css" rel="stylesheet" href="../css/custom-page.css"  media="screen,projection"/>
+</head>
+<body>
+	<header id="cabecalho">
+		<div class="row remove-margin">
+			<div class="col s12">
+				<img class="responsive-img" src="../img/logo-fametro.jpg">
+			</div>
+		</div>
+		<!-- Estrutura Dropdown para Tablets e Desktops -->
+		<ul id="dropdown1" class="dropdown-custom">
+		  	<li><a href="">Reservar</a></li>
+		  	<li><a href="">Minhas Reservas</a></li>
+		</ul>
+		<!-- Estrutura Dropdown para dispositivos Móveis -->
+		<ul id="dropdown2" class="dropdown-content-mobile">
+		  	<li><a href="">Reservar</a></li>
+		 	<li><a href="">Minhas Reservas</a></li>
+		</ul>
+		<nav class="green darken-custom">
+			<div class="nav-wrapper">
+			    <a href="" class="brand-logo resize">Bem-Vindo, Usuário!</a>
+			    <a href="#" data-activates="menu-mobile" class="button-collapse"><i class="material-icons">menu</i>
+			    <!-- Menu para Desktops -->
+			    <ul id="nav-mobile" class="right hide-on-med-and-down">
+			      	<li><a class="itens-resize itens-width" href="">Início</a></li>
+			      	<!-- Dropdown Trigger para Desktops -->
+		      		<li class=" itens-even"><a class="dropdown-button itens-resize" href="" data-activates="dropdown1">Reservas
+		      		<i class="material-icons right">arrow_drop_down</i></a></li>
+			     	<li><a class="itens-resize itens-width" href="">Salas</a></li>
+			      	<li class="active"><a class="itens-resize itens-width indicator" href="">Turmas</a></li>
+			      	<li><a class="itens-resize logout-width" href="">Sair</a></li>
+			    </ul>
+			    <!-- Menu para Tables e Dispositivos Móveis -->
+			    <ul id="menu-mobile" class="side-nav">
+			      	<li><a href="">Início</a></li>
+			      	<!-- Dropdown Trigger para Tablets e dispositivos Móveis-->
+		      		<li ><a class="dropdown-button" href="" data-activates="dropdown2">Reservas
+		      		<i class="material-icons right">arrow_drop_down</i></a></li>
+			     	<li ><a  href="">Salas</a></li>
+			      	<li class="active"><a  href="">Turmas</a></li>
+			      	<li><a  href="">Sair</a></li>
+			    </ul>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<div class="row">
+			<div class="col s11 offset-m1 offset-m1">
+			<!-- Tabela que apresentará os resultados que virão do banco de dados -->	
+				<table class="col s12 m4 l2 margin20">
+					<form action="" method="">
+						<thead class="remove-border"> 
+							<tr>
+								<td>
+								<!-- Imagem com tag de disponibilidade -->	
+									<img id="img-ads" class="responsive-img" src="../img/turma-disponivel.png">					
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+						  	<tr>
+						       	<td>
+						       		<div class="col s12">
+						       		<!-- Nome da turma com botão gerenciar -->
+										<label class="col s12 dynamic-label">LÓGICA MATEMÁTICA</label>
+									</div>
+									<button class="button-custom" type="submit" name="action">Gerenciar</button>		
+								</td>
+							</tr>
+						</tbody>
+					</form>
+				</table>	
+			</div>
+		</div>
+	</main>
+	<footer class="page-footer grey lighten-1">
+       	<div class="footer-copyright green darken-5">
+            <div class="container">
+           		<p>©2017 Sistema Gerenciador de Alocações e Reservas</p>
+            </div>
+        </div>
+    </footer>
+	<!-- JQuery -->
+	<script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
+	<!-- Materialize JS -->
+	<script type="text/javascript" src="../js/materialize.min.js"></script>
+	<script type="text/javascript">
+		//Menu Mobile
+		 $(".button-collapse").sideNav();
+	</script>
+</body>
+</html>
