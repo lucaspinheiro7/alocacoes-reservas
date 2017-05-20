@@ -7,40 +7,47 @@
 	<packaging>war</packaging>
 	<name>Sistema Gerenciador de Alocações e Reservas</name>
 	<description>Desenvolvimento de um sistema para gerenciar alocações e reservas de salas e laboratórios.</description>
-	
+
 	<properties>
-		<hibernate.version>4.3.5.Final</hibernate.version>
+		<hibernate.version>4.3.11.Final</hibernate.version>
 		<hibernate.group>org.hibernate</hibernate.group>
 		<slf4j.version>1.7.5</slf4j.version>
 	</properties>
-	
+
 	<dependencies>
-		
+	
+		<!-- Persistência  -->
 		<dependency>
 			<groupId>${hibernate.group}</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${hibernate.group}</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-		
+
 		<!-- Banco de Dados -->
 		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.38</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
 		</dependency>
-		
+
+		<!-- Teste Unitário -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
 
 	</dependencies>
 </project>
