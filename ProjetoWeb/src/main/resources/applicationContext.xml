@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	   http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 	
-	<bean class="br.com.fametro.model.dao.AdministradorDAO" />
+	<bean id="adminDAO" class="br.com.fametro.model.dao.AdministradorDAO" />
 	
 	<!-- Configurando o Data Source com os dados do banco -->
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -17,7 +20,7 @@
   	<!--  Criando um EntityManager -->
   	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
   	
-  		<!-- Referencia as propriedades do banco -->
+  		<!-- Referenciando as propriedades do banco -->
   		<property name="dataSource" ref="mysqlDataSource" />
   		
   		<!-- Adapter JPA - Hibernate -->
@@ -30,5 +33,17 @@
   		</property>
   		
   	</bean>
+  	
+  	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+  	
+  	<!-- Contrução do objeto de gestão de transações Spring JPA -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		
+		<!-- Vinculandoo com o objeto EntityManagerFactory construído anteriormente -->
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<!-- @Transactional irá chamar o gerenciador de transações -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 </beans>

@@ -12,12 +12,13 @@
 		<hibernate.version>4.3.11.Final</hibernate.version>
 		<hibernate.group>org.hibernate</hibernate.group>
 		<slf4j.version>1.7.5</slf4j.version>
+		<spring.group>org.springframework</spring.group>
 		<spring.version>3.2.4.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
-	
-		<!-- Persistência  -->
+
+		<!-- Persistência -->
 		<dependency>
 			<groupId>${hibernate.group}</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -49,19 +50,38 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
-		
+
 		<!-- Spring -->
 		<dependency>
-			<groupId>org.springframework</groupId>
+			<groupId>${spring.group}</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+			<version>3.2.5.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${spring.group}</groupId>
+			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 
 	</dependencies>
 </project>
