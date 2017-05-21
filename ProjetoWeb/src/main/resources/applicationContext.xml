@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<bean class="br.com.fametro.model.dao.AdministradorDAO" />
+	
+	<!-- Configurando o Data Source com os dados do banco -->
+	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	    <property name="url" value="jdbc:mysql://localhost:3306/projetowebdb" />
+	    <property name="username" value="root" />
+	    <property name="password" value="1234" />
+  	</bean>
+  	
+  	<!--  Criando um EntityManager -->
+  	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+  	
+  		<!-- Referencia as propriedades do banco -->
+  		<property name="dataSource" ref="mysqlDataSource" />
+  		
+  		<!-- Adapter JPA - Hibernate -->
+  		<property name="jpaVendorAdapter">
+  			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+  				<property name="generateDdl" value="true" />
+  				<property name="showSql" value="true" />
+  				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+  			</bean>
+  		</property>
+  		
+  	</bean>
+
+</beans>
