@@ -10,43 +10,6 @@
 	   http://www.springframework.org/schema/context
 	   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	   
-	<context:component-scan base-package="br.com.fametro" />
-	
-	<!-- Configurando o Data Source com os dados do banco -->
-	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
-	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	    <property name="url" value="jdbc:mysql://localhost:3306/projetowebdb" />
-	    <property name="username" value="root" />
-	    <property name="password" value="1234" />
-  	</bean>
-  	
-  	<!--  Criando um EntityManager -->
-  	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-  	
-  		<!-- Referenciando as propriedades do banco -->
-  		<property name="dataSource" ref="mysqlDataSource" />
-  		
-  		<!-- Adapter JPA - Hibernate -->
-  		<property name="jpaVendorAdapter">
-  			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-  				<property name="generateDdl" value="true" />
-  				<property name="showSql" value="true" />
-  				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
-  			</bean>
-  		</property>
-  		
-  	</bean>
-  	
-  	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-  	
-  	<!-- Contrução do objeto de gestão de transações Spring JPA -->
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		
-		<!-- Vinculandoo com o objeto EntityManagerFactory construído anteriormente -->
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-	
-	<!-- @Transactional irá chamar o gerenciador de transações -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-
+	   <bean class="br.com.fametro.model.dao.AdministradorDAO"/>
+	   
 </beans>

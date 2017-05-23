@@ -11,7 +11,7 @@ public class JPAUtil {
 	
 	static {
 		// Instanciando a fábrica
-		entityManagerFactory = Persistence.createEntityManagerFactory("persistenceUnit");
+		entityManagerFactory = Persistence.createEntityManagerFactory("persistence-unit");
 		// Instanciando o gerenciador
 		em = entityManagerFactory.createEntityManager();
 	}
