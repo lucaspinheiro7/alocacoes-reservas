@@ -7,13 +7,27 @@
 	<packaging>war</packaging>
 	<name>Sistema Gerenciador de Alocações e Reservas</name>
 	<description>Desenvolvimento de um sistema para gerenciar alocações e reservas de salas e laboratórios.</description>
+	
+	<build>
+     	<plugins>
+       		<plugin>
+	             <groupId>org.apache.maven.plugins</groupId>
+	             <artifactId>maven-compiler-plugin</artifactId>
+	             <version>3.0</version>
+	             <configuration>
+	                <source>1.8</source>
+	                <target>1.8</target>
+	             </configuration>
+        	</plugin>
+    	</plugins>
+	</build>
 
 	<properties>
 		<hibernate.version>4.3.11.Final</hibernate.version>
 		<hibernate.group>org.hibernate</hibernate.group>
 		<slf4j.version>1.7.5</slf4j.version>
 		<spring.group>org.springframework</spring.group>
-		<spring.version>3.2.5.RELEASE</spring.version>
+		<spring.version>4.0.6.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
@@ -81,7 +95,6 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-
 
 	</dependencies>
 </project>
