@@ -30,7 +30,7 @@ public abstract class Sala {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-	
+
 	public int getCapacidade() {
 		return capacidade;
 	}
@@ -43,5 +43,5 @@ public abstract class Sala {
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}		
+	}	
 }

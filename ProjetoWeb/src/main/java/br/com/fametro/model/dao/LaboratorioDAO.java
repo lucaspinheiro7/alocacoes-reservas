@@ -9,24 +9,24 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.fametro.model.entity.Administrador;
+import br.com.fametro.model.entity.Laboratorio;
 
 @Repository
-public class AdministradorDAO {
+public class LaboratorioDAO {
 	
 	// Injeção de dependência do Entity Manager
 	@PersistenceContext
 	EntityManager em;
 	 
 	@Transactional
-	public void salvar(Administrador administrador){
-		em.merge(administrador);
+	public void salvar(Laboratorio laboratorio){
+		em.merge(laboratorio);
 	}
 	
 	@Transactional
 	@SuppressWarnings("unchecked")
-	public List<Administrador> buscarTodos(){
-		Query consulta = em.createQuery("SELECT a FROM Administrador a");
+	public List<Laboratorio> buscarTodos(){
+		Query consulta = em.createQuery("SELECT l FROM Laboratorio l");
 		return consulta.getResultList();
 	}	
 }
