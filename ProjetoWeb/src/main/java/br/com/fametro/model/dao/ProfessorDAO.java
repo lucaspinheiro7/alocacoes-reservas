@@ -29,4 +29,9 @@ public class ProfessorDAO {
 		Query consulta = em.createQuery("SELECT p FROM Professor p");
 		return consulta.getResultList();
 	}	
+	
+	@Transactional
+	public Professor buscarPorId(long id){
+		return em.find(Professor.class, id);
+	}
 }

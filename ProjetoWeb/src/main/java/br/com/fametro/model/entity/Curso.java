@@ -27,6 +27,9 @@ public class Curso {
 	@OneToMany(mappedBy = "curso", targetEntity = Professor.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Professor> professores;
 	
+	@OneToMany(mappedBy = "curso", targetEntity = Turma.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Turma> turmas;
+	
 	public long getId() {
 		return id;
 	}

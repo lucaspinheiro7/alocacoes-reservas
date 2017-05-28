@@ -9,29 +9,25 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.fametro.model.entity.Laboratorio;
+import br.com.fametro.model.entity.ReservaLab;
 
 @Repository
-public class LaboratorioDAO {
-	
+public class ReservaLabDAO {
+
 	// Injeção de dependência do Entity Manager
 	@PersistenceContext
 	EntityManager em;
 	 
 	@Transactional
-	public void salvar(Laboratorio laboratorio){
-		em.merge(laboratorio);
+	public void salvar(ReservaLab reservaLab){
+		em.merge(reservaLab);
 	}
 	
 	@Transactional
 	@SuppressWarnings("unchecked")
-	public List<Laboratorio> buscarTodos(){
-		Query consulta = em.createQuery("SELECT l FROM Laboratorio l");
+	public List<ReservaLab> buscarTodos(){
+		Query consulta = em.createQuery("SELECT r FROM ReservaLab r");
 		return consulta.getResultList();
 	}	
 	
-	@Transactional
-	public Laboratorio buscarPorId(long id){
-		return em.find(Laboratorio.class, id);
-	}
 }
