@@ -86,8 +86,16 @@ input[type=date]:focus:not([readonly]) + label { color: #0b4b28; }
 button:focus { background-color: #016b3a; }
 input[type=date]:focus:not([readonly]) { border-bottom: 1px solid #ababab;
 box-shadow: 0 1px 0 0 #ababab; }
-#img-ads {background: url("../img/curso-ads.jpg"); background-size: cover; }
+
+
+#img-gesrh {background: url("../img/curso-gesrh.jpg"); background-size: cover; }
+#img-gescom {background: url("../img/curso-gescom.jpg"); background-size: cover; }
+#img-dir {background: url("../img/curso-dir.jpg"); background-size: cover; }
+#img-sisinf {background: url("../img/curso-sisinf.jpg"); background-size: cover; }
 #img-odonto {background: url("../img/curso-odonto.jpg"); background-size: cover; }
+#img-psic {background: url("../img/curso-psic.jpg"); background-size: cover; }
 #img-cont {background: url("../img/curso-contabilidade.jpg"); background-size: cover; }
 #img-sala {background: url("../img/sala.jpg"); background-size: cover; }
 #img-lab {background: url("../img/laboratorio.jpg"); background-size: cover; }
+#img-ads {background: url("../img/curso-ads.jpg"); background-size: cover; }
+#img-adm {background: url("../img/curso-adm.jpg"); background-size: cover; }

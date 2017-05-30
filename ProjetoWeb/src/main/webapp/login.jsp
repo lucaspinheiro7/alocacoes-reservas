@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,14 +18,37 @@
 <!-- Custom CSS -->
 <link type="text/css" rel="stylesheet" href="assets/css/login-page.css"
 	media="screen,projection" />
+	<style>
+		span{
+			font-size: 20px;
+			font-weight: bold;
+		}
+		
+	</style>
 </head>
 <body>
+	<c:set var="msg" value="${requestScope['msg']}" />
 	<div class="container positioner">
+	
+	<c:if test="${msg != null}">
+		<div class="row">
+	      <div class="col s12 m8 offset-m2 l8 offset-l2">
+	        <div class="card-panel red darken-2 center-align">
+	          <span class="white-text">
+	         	 <c:set var="msg" value="${requestScope['msg']}" />
+	         	 <c:out value="${msg}"/>
+	          </span>
+	        </div>
+	      </div>
+	    </div>
+	</c:if>
 		<div class="row">
 			<div class="col s12 m8 offset-m2 l8 offset-l2">
 				<div class="card-panel grey lighten-custom z-depth-4 ">
 					<div class="row">
-						<form class="col s12" action="" method="POST">
+					
+						<form class="col s12" action="/autenticacao.html" method="POST">
+						
 							<div class="row">
 								<div class="col s12 m6 l6">
 									<!-- Título para dispositivos móveis -->
@@ -45,14 +71,15 @@
 							
 								<!-- Divisão da Esquerda -->
 								<div class="col s12 m6 l6">
-									<br> <label for="email">Email</label> <input id="email"
-										type="text" name=""> <label for="email">Senha</label>
-									<input id="email" type="password" name="">
+									<br> 
+										<label for="email">Email</label> 
+										<input id="email" type="text" name="email"> 
+										<label for="email">Senha</label>
+										<input id="email" type="password" name="senha">
 									<div class="margin20"></div>
-									<label for="tipoDeUsuario">Tipo de usuário</label> <select
-										class="white-bg">
-										<option value="" disabled selected>Tipo de Usuário</option>
-										<option value="1">Administrador</option>
+									<label for="tipoDeUsuario">Tipo de usuário</label> 
+									<select class="white-bg" name="identificador">
+										<option value="1" selected>Administrador</option>
 										<option value="2">Professor</option>
 									</select>
 								</div>
@@ -64,12 +91,13 @@
 										src="assets/img/logo-fametro2.png">
 									<div class="margin25"></div>
 									<div class="container">
-										<button class="button-custom" type="submit" name="action">Acessar</button>
+										<button class="button-custom">Acessar</button>
 									</div>
 								</div>
-								
 							</div>
+							
 						</form>
+						
 					</div>
 				</div>
 			</div>

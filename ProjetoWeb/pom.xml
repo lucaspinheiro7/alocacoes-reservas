@@ -46,6 +46,13 @@
 			<version>2.2</version>
 		</dependency>
 
+		<!-- JSR-330 @Inject @Named -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>${spring.group}</groupId>
@@ -62,6 +69,12 @@
 		<dependency>
 			<groupId>${spring.group}</groupId>
 			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${spring.group}</groupId>
+			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 
@@ -96,7 +109,7 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
