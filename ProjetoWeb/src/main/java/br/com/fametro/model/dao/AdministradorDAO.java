@@ -14,7 +14,7 @@ import br.com.fametro.model.entity.Administrador;
 @Repository
 public class AdministradorDAO {
 	
-	// Injeção de dependência do Entity Manager
+	// InjeÃ§Ã£o de dependÃªncia do Entity Manager
 	@PersistenceContext
 	EntityManager em;
 	 

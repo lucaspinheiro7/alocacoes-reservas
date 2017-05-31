@@ -1,8 +1,10 @@
-/*CUSTOMIZAÇÃO DO BACKGROUND*/
+@charset="uft-8";
+
+/*CUSTOMIZAÃ‡ÃƒO DO BACKGROUND*/
 body { background: url("../img/background-login.jpg") no-repeat center center fixed; background-size: cover; }
 
 
-/*CUSTOMIZAÇÃO DE CORES*/
+/*CUSTOMIZAÃ‡ÃƒO DE CORES*/
 .grey.lighten-custom {background-color: #e5e5e5 !important; }
 .white-bg{ background-color: #fff; }
 input[type=text]:focus:not([readonly]) + label, input[type=password]:focus:not([readonly]) + label { color: #0b4b28; }
@@ -11,7 +13,7 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 box-shadow: 0 1px 0 0 #ababab; }
 
 
-/*CUSTOMIZAÇÃO DO FORMULÁRIO*/
+/*CUSTOMIZAÃ‡ÃƒO DO FORMULÃ�RIO*/
 input[type=text], input[type=password] { background-color: #ffffff; border: 1px solid #ababab; 
 border-radius: 0; outline: none; height: 2.2rem; width: 100%; font-size: 1rem; margin-bottom: 2%; padding: 0 0 0 5px; 
 box-shadow: none; box-sizing: content-box; transition: all 0.3s; }
@@ -24,14 +26,15 @@ h5 { font-weight: bold; font-size: 25px; color: #004926; }
 label { color: #004926; position: relative; font-size: 18px; cursor: text; text-align: initial; }
 
 
-/*CUSTOMIZAÇÃO DE DESIGN*/
+/*CUSTOMIZAÃ‡ÃƒO DE DESIGN*/
 .dropdown-content li > a, .dropdown-content li > span { font-size: 16px; color: #004926; display: relative; 
 line-height: 22px; padding: 14px 16px; }
 .dropdown-content li:hover, .dropdown-content a:hover, .dropdown-content li.active, .dropdown-content li.selected { 
 background: linear-gradient(#cecece, #ffffff); color: #004926; }
 
 
-/*CUSTOMIZAÇÃO DE POSIÇÃO*/
+/*CUSTOMIZAÃ‡ÃƒO DE POSIÃ‡ÃƒO*/
 .margin20 { margin: 20px; }
 .margin25 { margin: 25px; }
 .positioner { margin-top: 5%; }
+.remove-margin { margin: 0; }

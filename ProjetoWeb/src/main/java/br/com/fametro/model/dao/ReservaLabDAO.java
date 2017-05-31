@@ -14,7 +14,7 @@ import br.com.fametro.model.entity.ReservaLab;
 @Repository
 public class ReservaLabDAO {
 
-	// Injeção de dependência do Entity Manager
+	// InjeÃ§Ã£o de dependÃªncia do Entity Manager
 	@PersistenceContext
 	EntityManager em;
 	 

@@ -2,7 +2,6 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -19,11 +18,8 @@
 <link type="text/css" rel="stylesheet" href="assets/css/login-page.css"
 	media="screen,projection" />
 	<style>
-		span{
-			font-size: 20px;
-			font-weight: bold;
-		}
-		
+		span{ font-size: 20px; font-weight: bold;}
+		.resize-alert{ width: 100%; height: 50px; line-height: 50px; }
 	</style>
 </head>
 <body>
@@ -31,20 +27,20 @@
 	<div class="container positioner">
 	
 	<c:if test="${msg != null}">
-		<div class="row">
+		<div style="margin-bottom: 0;" class="row">
 	      <div class="col s12 m8 offset-m2 l8 offset-l2">
-	        <div class="card-panel red darken-2 center-align">
-	          <span class="white-text">
-	         	 <c:set var="msg" value="${requestScope['msg']}" />
-	         	 <c:out value="${msg}"/>
-	          </span>
+	        <div class="card-panel red darken-2 resize-alert center-align valign-wrapper">
+		    	<span style="width: 100%;" class="white-text">
+	         		<c:set var="msg" value="${requestScope['msg']}" />
+	         		<c:out value="${msg}"/>
+		       	</span>
 	        </div>
 	      </div>
 	    </div>
 	</c:if>
 		<div class="row">
 			<div class="col s12 m8 offset-m2 l8 offset-l2">
-				<div class="card-panel grey lighten-custom z-depth-4 ">
+				<div class="card-panel grey lighten-custom z-depth-4">
 					<div class="row">
 					
 						<form class="col s12" action="/autenticacao.html" method="POST">
@@ -71,17 +67,17 @@
 							
 								<!-- Divisão da Esquerda -->
 								<div class="col s12 m6 l6">
-									<br> 
-										<label for="email">Email</label> 
-										<input id="email" type="text" name="email"> 
-										<label for="email">Senha</label>
-										<input id="email" type="password" name="senha">
-									<div class="margin20"></div>
-									<label for="tipoDeUsuario">Tipo de usuário</label> 
-									<select class="white-bg" name="identificador">
-										<option value="1" selected>Administrador</option>
-										<option value="2">Professor</option>
-									</select>
+									<br>
+									<label for="email">Email</label>
+							        <input id="email" type="text" name="email"> 
+							        <label for="email">Senha</label>
+							        <input id="email" type="password" name="senha"> 	
+							        <div class="margin20"></div>							  
+							    	<label for="tipoDeUsuario">Tipo de usuário</label>
+								    <select class="white-bg" name="identificador">
+								     	<option value="1" selected> Administrador</option>
+								      	<option value="2"> Professor</option>
+						    		</select>  		        
 								</div>
 								
 								<!-- Divisão da Direita -->
@@ -103,15 +99,14 @@
 			</div>
 		</div>
 	</div>
-	<!-- JQuery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<!-- Compiled and minified JavaScript -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('select').material_select();
-		});
-	</script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+	<script type="text/javascript"> 
+	  	$(document).ready(function() {
+	    	$('select').material_select();
+	  	});
+  	</script>
 </body>
 </html>

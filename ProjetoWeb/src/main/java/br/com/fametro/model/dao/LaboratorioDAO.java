@@ -14,7 +14,7 @@ import br.com.fametro.model.entity.Laboratorio;
 @Repository
 public class LaboratorioDAO {
 	
-	// Injeção de dependência do Entity Manager
+	// InjeÃ§Ã£oo de dependÃªncia do Entity Manager
 	@PersistenceContext
 	EntityManager em;
 	 

@@ -15,7 +15,7 @@ import br.com.fametro.model.entity.Turma;
 @Repository
 public class TurmaDAO {
 	
-	// Injeção de dependência do Entity Manager
+	// InjeÃ§Ã£o de dependÃªncia do Entity Manager
 	@PersistenceContext
 	EntityManager em;
 	 

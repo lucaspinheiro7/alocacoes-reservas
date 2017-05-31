@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 public class Laboratorio extends Sala {
 	
 	public Laboratorio(){
-		this.status = "disponível";
+		this.status = "disponÃ­vel";
 	}
 	
 	@OneToMany(mappedBy = "laboratorio", targetEntity = ReservaLab.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)

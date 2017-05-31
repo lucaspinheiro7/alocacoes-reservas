@@ -21,9 +21,6 @@ public class AdminController {
 	@RequestMapping("/inicio")
 	public ModelAndView inicio(){
 		
-		//String msg = "teste";
-		
-		//return new ModelAndView("/administrador/inicio", "msg", msg);
 		List<Turma> turmas = adminService.buscarTurmasDisponiveis(); 
 
 		return new ModelAndView("/administrador/inicio", "turmas", turmas);	
@@ -32,9 +29,32 @@ public class AdminController {
 	@RequestMapping("/alocacao-automatica")
 	public ModelAndView alocacaoAutomatica(){
 		
-		String message = "Alocacao automatica";
+		return new ModelAndView("/administrador/alocacao-automatica");
+	}
+	
+	@RequestMapping("/alocacao-manual")
+	public ModelAndView alocacaoManual(){
+	
+		return new ModelAndView("/administrador/alocacao-manual");
+	}
+	
+	@RequestMapping("/salas")
+	public ModelAndView salas(){
 		
-		return new ModelAndView("/administrador/alocacao-automatica", "message", message);
+		return new ModelAndView("/administrador/salas");
+	}
+	
+	@RequestMapping("turmas")
+	public ModelAndView turmas(){
+		return new ModelAndView("/administrador/turmas");
+	}
+	
+	@RequestMapping("/gerenciar-turma")
+	public ModelAndView gerenciarTurma(Turma turma){
+		
+		Turma turmaSelected = adminService.buscarPorDisciplina(turma);
+		
+		return new ModelAndView("/administrador/inicio-gerenciar", "turmaSelect", turmaSelected);
 	}
 
 }

@@ -9,6 +9,7 @@
 	<description>Desenvolvimento de um sistema para gerenciar alocações e reservas de salas e laboratórios.</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.group>org.springframework</spring.group>
 		<spring.version>4.0.5.RELEASE</spring.version>
 		<hibernate.group>org.hibernate</hibernate.group>

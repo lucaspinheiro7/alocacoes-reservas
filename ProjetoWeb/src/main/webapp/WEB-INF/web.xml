@@ -24,5 +24,9 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
-	
+
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+
 </web-app>

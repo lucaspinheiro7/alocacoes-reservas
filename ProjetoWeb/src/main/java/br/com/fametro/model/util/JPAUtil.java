@@ -6,18 +6,18 @@ import javax.persistence.Persistence;
 
 public class JPAUtil {
 	
-	private static EntityManagerFactory entityManagerFactory; // F·brica
+	private static EntityManagerFactory entityManagerFactory; // F√°brica
 	private static EntityManager em; // Gerenciador de entidades
 	
 	static {
-		// Instanciando a f·brica
+		// Instanciando a f√°brica
 		entityManagerFactory = Persistence.createEntityManagerFactory("persistence-unit");
 		// Instanciando o gerenciador
 		em = entityManagerFactory.createEntityManager();
 	}
 	
 	/**
-	 * MÈtodo que retorna um objeto EntityManager
+	 * M√©todo que retorna um objeto EntityManager
 	 * @return
 	 */
 	public static EntityManager abreConexao(){

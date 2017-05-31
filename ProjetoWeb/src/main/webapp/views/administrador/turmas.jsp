@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title> Alocação Automatica | Administrador</title>
+	<title> Turmas | Administrador</title>
 	<!-- Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- Compiled and minified CSS -->
@@ -35,79 +35,61 @@
 		</ul>
 		<nav class="green darken-custom">
 			<div class="nav-wrapper">
-			    <a href="" class="brand-logo resize">Bem-Vindo, <c:out value="${admin.nome}"/>!</a>
+			    <a href="" class="brand-logo resize">Bem-Vindo, <c:out value="${admin.nome}" />!</a>
 			    <a href="#" data-activates="menu-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			    <!-- Menu para Desktops -->
 			    <ul id="nav-mobile" class="right hide-on-med-and-down">
-			      	<li ><a class="itens-resize itens-width" href="<c:url value ='/administrador/inicio.html'/>">Início</a></li>
+			      	<li><a class="itens-resize itens-width" href="<c:url value ='/administrador/inicio.html'/>">Início</a></li>
 			      	<!-- Dropdown Trigger para Desktops -->
-		      		<li class="itens-even active"><a class="dropdown-button itens-resize indicator" href="" data-activates="dropdown1">Alocação
+		      		<li class="itens-even"><a class="dropdown-button itens-resize" href="" data-activates="dropdown1">Alocação
 		      		<i class="material-icons right">arrow_drop_down</i></a></li>
 			     	<li><a class="itens-resize itens-width" href="<c:url value ='/administrador/salas.html'/>">Salas</a></li>
-			      	<li><a class="itens-resize itens-width" href="<c:url value ='/administrador/turmas.html'/>">Turmas</a></li>
+			      	<li><a class="active itens-resize itens-width indicator" href="<c:url value ='/administrador/turmas.html'/>">Turmas</a></li>
 			      	<li><a class="itens-resize logout-width" href="<c:url value ='../logout.html'/>">Sair</a></li>
 			    </ul>
 			    <!-- Menu para Tables e Dispositivos Móveis -->
 			    <ul id="menu-mobile" class="side-nav">
 			      	<li ><a href="<c:url value ='/administrador/inicio.html'/>">Início</a></li>
 			      	<!-- Dropdown Trigger para Tablets e dispositivos Móveis-->
-		      		<li class="active"><a class="dropdown-button" href="" data-activates="dropdown2">Alocação
+		      		<li><a class="dropdown-button" href="" data-activates="dropdown2">Alocação
 		      		<i class="material-icons right">arrow_drop_down</i></a></li>
 			     	<li><a  href="<c:url value ='/administrador/salas.html'/>">Salas</a></li>
-			      	<li><a  href="<c:url value ='/administrador/turmas.html'/>">Turmas</a></li>
+			      	<li class="active"><a  href="<c:url value ='/administrador/turmas.html'/>">Turmas</a></li>
 			      	<li><a  href="<c:url value ='../logout.html'/>">Sair</a></li>
 			    </ul>
 			</div>
 		</nav>
 	</header>
-		<main>
-			<!-- Breadcrumb -->
-			<nav class="transparent-bg">
-			    <div class="row margin10">
-			      	<div class="col s12">
-				        <a href="#!" class="breadcrumb green-darken-6">Alocação</a>
-				        <a href="#!" class="breadcrumb green-darken-6">Alocação Automática</a>
-			      	</div>
-			    </div>
-		  	</nav>
-		  	<div class="row">
-			  	<div class="container">
-			  	
-			  		<form action="" method="">
-			  		
-					  	<div class="col s12">
-					  		<div class="col s12 m8 offset-m2 l8 offset-l2">
-					  			<div class="card-panel grey lighten-custom z-depth-5 remove-margin flatten">
-					  			<!-- Mensagem de aviso para alocação automátiva -->
-						  			<div class="card-panel green darken-5 z-depth-4 remove-margin flatten">
-										<p class="center-align warning"> 
-											AVISO
-										</p>
-						  			</div>
-				  				<p class="center-align message margin20"> 
-									Na alocação automática, todas as turmas disponíveis serão alocadas<br>
-									nas salas disponíveis que tenham o mesmo tamanho da turma.<br>
-									Não serão alocadas turmas pequenas em salas médias,<br>
-									nem turmas médias ou pequenas em salas grandes.<br>
-									Caso deseje, isso poderá ser feito na alocação manual.<br>
-									Para que a alocação automática seja iniciada,<br>
-									clique no botão "Alocar".
-								</p>
-					  			</div>
-					  		</div>
-					  	</div>
-					  	<div class="row">
-					  		<div class="col s12 margin-top40">
-						  		<div class="margin0 col s10 offset-s1 m4 offset-m4 l4 offset-l4">
-						  			<button class="button-custom" type="submit" name="action">Alocar</button>
-						  		</div>
-						  	</div>
-					  	</div>
+	<main>
+		<div class="row">
+			<div class="col s11 offset-m1 offset-m1">
+			<!-- Tabela que apresentará os resultados que virão do banco de dados -->
+				<table class="col s12 m4 l2 margin20">
+					<form action="" method="">
+						<thead class="remove-border"> 
+							<tr>
+								<td>
+								<!-- Imagem com tag de disponibilidade -->								
+									<img id="img-ads" class="responsive-img" src="/assets/img/turma-disponivel.png">						
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+						  	<tr>
+						       	<td>
+						       		<div class="col s12">
+						       		<!-- Nome da turma com botão gerenciar -->
+										<label class="col s12 dynamic-label">LÓGICA MATEMÁTICA</label>
+									</div>
+									<button class="button-custom" type="submit" name="action">Gerenciar</button>	
+								</td>
+							</tr>
+						</tbody>
 					</form>
-				</div>
-		  	</div>
-		</main>
-
+				</table>	
+			</div>
+		</div>
+	</main>
 	<footer class="page-footer grey lighten-1">
        	<div class="footer-copyright green darken-5">
             <div class="container">

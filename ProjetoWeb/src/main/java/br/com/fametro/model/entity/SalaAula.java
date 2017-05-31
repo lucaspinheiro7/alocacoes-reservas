@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class SalaAula extends Sala{
 	
 	public SalaAula(){
-		this.status = "disponível";
+		this.status = "disponÃ­vel";
 	}	
 	
 	@OneToMany(mappedBy = "sala", targetEntity = ReservaSala.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)

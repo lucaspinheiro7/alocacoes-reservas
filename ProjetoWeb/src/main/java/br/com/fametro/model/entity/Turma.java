@@ -37,7 +37,7 @@ public class Turma {
 	private Curso curso;
 	
 	public Turma(){
-		this.status = "disponível";
+		this.status = "disponÃ­vel";
 	}
 	
 	public long getId() {

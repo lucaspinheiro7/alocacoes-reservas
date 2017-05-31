@@ -32,7 +32,7 @@ public class AdministradorService {
 		
 		for (Turma t : todasTurmas){
 			
-			if (t.getStatus().equals("dispon�vel")){
+			if (t.getStatus().equals("disponível")){
 				
 				turmasDisponiveis.add(t);
 				
@@ -41,5 +41,33 @@ public class AdministradorService {
 		}
 		
 		return turmasDisponiveis;
+	}
+	
+	public Turma buscarPorDisciplina(Turma turma){
+		
+		List<Turma> todasTurmas = turmaDAO.buscarTodos();
+		//Busca todas as turmas do banco
+		
+		for(Turma t : todasTurmas){
+			
+			System.out.println("COMPARAÇÃO:  \n"
+					+ t.getDisciplina() + " = " + turma.getDisciplina() + " ??? \n");
+			if (turma.getDisciplina().equals(t.getDisciplina())){
+				//Verifica qual turma tem o mesmo nome da que foi passada por parametro
+				
+				turma.setId(t.getId());
+				turma.setCurso(t.getCurso());
+				turma.setProfessor(t.getProfessor());
+				turma.setQuantAlunos(t.getQuantAlunos());
+				turma.setSala(t.getSala());
+				turma.setStatus(t.getStatus());
+				//passa os atributos da turma encontrada para o objeto que sera retornado
+
+				break;	
+			}
+			
+		}
+		
+		return turma;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,8 +39,16 @@ public class LoginController {
 		return new ModelAndView("../login", "msg", msg);
 	}
 	
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpSession session){
+		
+		session.invalidate();
+		
+		return new ModelAndView("../login");
+	}
+	
 	@RequestMapping(value = "/autenticacao", method = RequestMethod.POST)
-	public ModelAndView autenticacao(@RequestParam(value = "identificador") String id, Professor prof, Administrador admin){
+	public ModelAndView autenticacao(@RequestParam(value = "identificador") String id, Professor prof, Administrador admin, HttpSession session){
 	
 		int identificador = Integer.parseInt(id);
 		
@@ -49,14 +58,17 @@ public class LoginController {
 			
 			if (adminAutenticado != null){
 				
-				Map<String, Object> models = new HashMap<String, Object>();
+				//Map<String, Object> models = new HashMap<String, Object>();
 				
 				List<Turma> turmas = adminService.buscarTurmasDisponiveis(); 
 				
-				models.put("adminAutenticado", adminAutenticado);
-			    models.put("turmas", turmas);
+				session.setAttribute("adminAutenticado", adminAutenticado);
+				
+				//models.put("adminAutenticado", adminAutenticado);
+			    //models.put("turmas", turmas);
 			    
-			    return new ModelAndView("/administrador/inicio", models);
+			    
+			   return new ModelAndView("/administrador/inicio", "turmas", turmas);
 
 			} else {
 				return loginError();
