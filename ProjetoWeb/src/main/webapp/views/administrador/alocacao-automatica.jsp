@@ -14,6 +14,10 @@
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
     <!-- Custom CSS -->
     <link type="text/css" rel="stylesheet" href="/assets/css/custom-page.css"  media="screen,projection"/>
+    <style>
+		.font-alert{ font-size: 15px; font-weight: bold;}
+	
+	</style>
 </head>
 <body>
 	<c:set var="admin" value="${sessionScope['adminAutenticado']}" />
@@ -70,10 +74,46 @@
 			      	</div>
 			    </div>
 		  	</nav>
+		  	
+		  	<c:set var="msgSucess" value="${msgSucess}" />
+		  	<c:set var="msgError" value="${msgError}" />
+		  	<c:set var="msgStatus1" value="${msgStatus1}" />
+			<c:set var="msgStatus2" value="${msgStatus2}" />
+		  	
 		  	<div class="row">
-			  	<div class="container">
+				<div class="container">
 			  	
-			  		<form action="" method="">
+			  
+			  	<c:choose>
+			  		<c:when test="${msgSucess != null}">
+						<div style="margin-bottom: 0;" class="row">
+					      	<div class="col s12 m8 offset-m2 l8 offset-l2">
+					        	<div class="card-panel green darken-1 resize-alert center-align valign-wrapper">
+						    		<span style="width: 100%;" class="white-text font-alert">
+						         		<c:out value="${msgSucess}"/><br>
+						         		<c:out value="${msgStatus1}"/><br>
+						         		<c:out value="${msgStatus2}"/>
+						       	 	</span>
+					       		 </div>
+					     	 </div>
+					    </div>
+					</c:when>
+					<c:when test="${msgError != null}">
+						<div style="margin-bottom: 0;" class="row">
+				     		<div class="col s12 m8 offset-m2 l8 offset-l2">
+				        		<div class="card-panel red darken-1 resize-alert center-align valign-wrapper">
+							    	<span style="width: 100%; font-size:12px;" class="white-text font-alert">
+						         		<c:out value="${msgError}"/><br>
+							       	</span>
+				        		</div>
+				      		</div>
+					    </div>
+					</c:when>
+				</c:choose>
+					
+	
+					
+			  		<form action="/administrador/alocar-automaticamente.html" method="POST">
 			  		
 					  	<div class="col s12">
 					  		<div class="col s12 m8 offset-m2 l8 offset-l2">
@@ -99,11 +139,13 @@
 					  	<div class="row">
 					  		<div class="col s12 margin-top40">
 						  		<div class="margin0 col s10 offset-s1 m4 offset-m4 l4 offset-l4">
-						  			<button class="button-custom" type="submit" name="action">Alocar</button>
+						  			<button class="button-custom">Alocar</button>
 						  		</div>
 						  	</div>
 					  	</div>
+					  	
 					</form>
+					
 				</div>
 		  	</div>
 		</main>

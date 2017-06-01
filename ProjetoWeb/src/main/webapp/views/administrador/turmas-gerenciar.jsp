@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Gerenciar | Administrador</title>
+<title> Gerenciar Turma | Administrador</title>
 <!-- Google Icon Font-->
    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Compiled and minified CSS -->
@@ -41,22 +41,22 @@
 			    <a href="#" data-activates="menu-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			    <!-- Menu para Desktops -->
 			    <ul id="nav-mobile" class="right hide-on-med-and-down">
-			      	<li class="active"><a class="itens-resize itens-width indicator" href="<c:url value ='/administrador/inicio.html'/>">Início</a></li>
+			      	<li ><a class="itens-resize itens-width" href="<c:url value ='/administrador/inicio.html'/>">Início</a></li>
 			      	<!-- Dropdown Trigger para Desktops -->
 		      		<li class="itens-even"><a class="dropdown-button itens-resize" href="" data-activates="dropdown1">Alocação
 		      		<i class="material-icons right">arrow_drop_down</i></a></li>
 			     	<li><a class="itens-resize itens-width" href="<c:url value ='/administrador/salas.html'/>">Salas</a></li>
-			      	<li><a class="itens-resize itens-width" href="<c:url value ='/administrador/turmas.html'/>">Turmas</a></li>
+			      	<li class="active"><a class="itens-resize itens-width  indicator" href="<c:url value ='/administrador/turmas.html'/>">Turmas</a></li>
 			      	<li><a class="itens-resize logout-width" href="<c:url value ='../logout.html'/>">Sair</a></li>
 			    </ul>
 			    <!-- Menu para Tables e Dispositivos Móveis -->
 			    <ul id="menu-mobile" class="side-nav">
-			      	<li class="active"><a href="<c:url value ='/administrador/inicio.html'/>">Início</a></li>
+			      	<li ><a href="<c:url value ='/administrador/inicio.html'/>">Início</a></li>
 			      	<!-- Dropdown Trigger para Tablets e dispositivos Móveis-->
 		      		<li><a class="dropdown-button" href="" data-activates="dropdown2">Alocação
 		      		<i class="material-icons right">arrow_drop_down</i></a></li>
 			     	<li><a  href="<c:url value ='/administrador/salas.html'/>">Salas</a></li>
-			      	<li><a  href="<c:url value ='/administrador/turmas.html'/>">Turmas</a></li>
+			      	<li class="active"><a  href="<c:url value ='/administrador/turmas.html'/>">Turmas</a></li>
 			      	<li><a  href="<c:url value ='../logout.html'/>">Sair</a></li>
 			    </ul>
 			</div>
@@ -68,7 +68,7 @@
 			<nav class="transparent-bg">
 			    <div class="row margin10">
 			      	<div class="col s12">
-				        <a href="<c:url value ='/administrador/inicio.html'/>" class="breadcrumb green-darken-6">Início</a>
+				        <a href="<c:url value ='/administrador/turmas.html'/>" class="breadcrumb green-darken-6">Turma</a>
 				        <a href="#!" class="breadcrumb green-darken-6">Gerenciar</a>
 			      	</div>
 			    </div>
@@ -79,15 +79,15 @@
 					<!-- Menu de exibição para turma selecionada-->
 					
 					
-						<img id="img-ads" class="responsive-img" src="/assets/img/turma-disponível.png">
+						<img id="img-ads" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
 						
 						<label class="col s12 dynamic-label"><c:out value="${fn:toUpperCase(turma.disciplina)}"></c:out></label>
 						<label class="col s12 dynamic-label-red"><c:out value="${turma.quantAlunos}"></c:out> ALUNOS</label>
 						<label class="col s12 dynamic-label">Professor(a): 
 								<label class="dynamic-label-red"><c:out value="${turma.professor.nome}"></c:out></label>
 						</label>
-						<c:if test="${turma.sala }">
-							<label class="col s12 dynamic-label">SALA
+						<c:if test="${turma.sala != null}">
+							<label class="col s12 dynamic-label">SALA 
 									<label class="dynamic-label-red"><c:out value="${turma.sala.numero}"></c:out></label>
 							</label>
 						</c:if>

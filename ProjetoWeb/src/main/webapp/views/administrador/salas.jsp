@@ -64,13 +64,18 @@
 		<div class="row">
 			<div class="col s11 offset-m1 offset-m1">
 			<!-- Tabela que apresentará os resultados que virão do banco de dados -->
-				<table class="col s12 m4 l2 margin20">
-					<form action="" method="">
+			
+			<c:forEach var="sala" items="${salas}">
+			
+				<form action="/administrador/salas-gerenciar.html" method="POST">
+					
+					<table class="col s12 m4 l2 margin20">
+				
 						<thead class="remove-border"> 
 							<tr>
 								<td>
 								<!-- Imagem com tag de disponibilidade -->
-									<img id="img-sala" class="responsive-img" src="/assets/img/sala-disponivel.png">					
+									<img id="img-sala" class="responsive-img" src="/assets/img/sala-<c:out value="${sala.status}"/>.png">					
 								</td>
 							</tr>
 						</thead>
@@ -79,14 +84,57 @@
 						       	<td>
 						       	<!-- Nome da sala com botão gerenciar -->
 						       		<div class="col s12">
-										<label class="col s12 dynamic-label">SALA 100</label>
+						       		<marquee scrolldelay=50 >
+										<label class="col s12 dynamic-label">SALA <c:out value="${sala.numero}"></c:out></label>
+										<input type="hidden" name="numero" value="<c:out value="${sala.numero}"/>">
+									</marquee>
 									</div>
-									<button class="button-custom" type="submit" name="action">Gerenciar</button>
+									<button class="button-custom">Gerenciar</button>
 								</td>
 							</tr>
 						</tbody>
-					</form>
-				</table>	
+					
+					</table>
+				
+				</form>	
+				
+			</c:forEach>
+			
+			<c:forEach var="lab" items="${labs}">
+			
+				<form action="/administrador/laboratorios-gerenciar.html" method="POST">
+					
+					<table class="col s12 m4 l2 margin20">
+				
+						<thead class="remove-border"> 
+							<tr>
+								<td>
+								<!-- Imagem com tag de disponibilidade -->
+									<img id="img-lab" class="responsive-img" src="/assets/img/sala-<c:out value="${lab.status}"/>.png">					
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+						  	<tr>
+						       	<td>
+						       	<!-- Nome da sala com botão gerenciar -->
+						       		<div class="col s12">
+						       		<marquee scrolldelay=100 >
+										<label class="col s12 dynamic-label">LABORATÓRIO <c:out value="${lab.numero}"></c:out></label>
+										<input type="hidden" name="numero" value="<c:out value='${lab.numero}'/>">
+									</marquee>	
+									</div>
+									<button class="button-custom">Gerenciar</button>
+								</td>
+							</tr>
+						</tbody>
+					
+					</table>
+				
+				</form>	
+				
+			</c:forEach>
+				
 			</div>
 		</div>
 	</main>

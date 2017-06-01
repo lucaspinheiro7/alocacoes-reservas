@@ -82,7 +82,7 @@
 
 			<c:forEach var="turma" items="${turmas}">
 			
-			<form action="/administrador/gerenciar-turma.html" method="POST">
+			<form action="/administrador/turmas-gerenciar.html" method="POST">
 
 				<table class="col s12 m4 l2 margin20">
 
@@ -92,28 +92,28 @@
 									<!-- Imagem com tag de disponibilidade --> 
 									<c:choose>
 										<c:when test="${turma.curso.nome == 'Análise e Desenvolvimento de Sistemas'}">
-											<img id="img-ads" class="responsive-img" src="/assets/img/turma-disponivel.png">
+											<img id="img-ads" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
 										</c:when>
 										<c:when test="${turma.curso.nome == 'Gestão Comercial'}">
-											<img id="img-gescom" class="responsive-img" src="/assets/img/turma-disponivel.png">
+											<img id="img-gescom" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
 										</c:when>
 										<c:when test="${turma.curso.nome == 'Odontologia'}">
-											<img id="img-odonto" class="responsive-img" src="/assets/img/turma-disponivel.png">
+											<img id="img-odonto" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
 										</c:when>
 										<c:when test="${turma.curso.nome == 'Sistemas de Informação'}">
-											<img id="img-sisinf" class="responsive-img" src="/assets/img/turma-disponivel.png">
+											<img id="img-sisinf" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
 										</c:when>
 										<c:when test="${turma.curso.nome == 'Gestão de Recursos Humanos'}">
-											<img id="img-gesrh" class="responsive-img" src="/assets/img/turma-disponivel.png">
+											<img id="img-gesrh" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
 										</c:when>
 										<c:when test="${turma.curso.nome == 'Administração'}">
-											<img id="img-adm" class="responsive-img" src="/assets/img/turma-disponivel.png">
+											<img id="img-adm" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
 										</c:when>
 										<c:when test="${turma.curso.nome == 'Psicologia'}">
-											<img id="img-psic" class="responsive-img" src="/assets/img/turma-disponivel.png">
+											<img id="img-psic" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
 										</c:when>
 										<c:otherwise>
-											<img id="img-dir" class="responsive-img" src="/assets/img/turma-disponivel.png">
+											<img id="img-dir" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
 										</c:otherwise>
 									</c:choose>
 								</td>

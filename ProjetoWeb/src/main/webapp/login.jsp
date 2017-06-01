@@ -18,20 +18,20 @@
 <link type="text/css" rel="stylesheet" href="assets/css/login-page.css"
 	media="screen,projection" />
 	<style>
-		span{ font-size: 20px; font-weight: bold;}
+		.font-alert{ font-size: 20px; font-weight: bold;}
 		.resize-alert{ width: 100%; height: 50px; line-height: 50px; }
 	</style>
 </head>
 <body>
-	<c:set var="msg" value="${requestScope['msg']}" />
+	<c:set var="msg" value="${msg}" />
 	<div class="container positioner">
 	
 	<c:if test="${msg != null}">
 		<div style="margin-bottom: 0;" class="row">
 	      <div class="col s12 m8 offset-m2 l8 offset-l2">
 	        <div class="card-panel red darken-2 resize-alert center-align valign-wrapper">
-		    	<span style="width: 100%;" class="white-text">
-	         		<c:set var="msg" value="${requestScope['msg']}" />
+		    	<span style="width: 100%;" class="white-text font-alert">
+	         		<c:set var="msg" value="${msg}" />
 	         		<c:out value="${msg}"/>
 		       	</span>
 	        </div>
