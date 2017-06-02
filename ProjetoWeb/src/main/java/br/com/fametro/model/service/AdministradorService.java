@@ -55,6 +55,24 @@ public class AdministradorService {
 		return turmasDisponiveis;
 	}
 	
+	public List<Turma> buscarTurmasOcupadas(){
+		
+		List<Turma> todasTurmas = turmaDAO.buscarTodos();
+		List<Turma> turmasOcupadas = new ArrayList<Turma>();
+		
+		for (Turma t : todasTurmas){
+			
+			if (t.getStatus().equals("ocupada")){
+				
+				turmasOcupadas.add(t);
+				
+			}
+			
+		}
+		
+		return turmasOcupadas;
+	}
+	
 	public List<SalaAula> buscarSalasDisponiveis(){
 		
 		List<SalaAula> todasSalas = salaDAO.buscarTodos();
@@ -174,15 +192,13 @@ public class AdministradorService {
 		List<SalaAula> salasDisponiveis = buscarSalasDisponiveis(); //  traz uma lista com as turmas disponiveis
 		int tnAloc = 0;
 		int tAloc = 0;
-		int indice = 0;
 				
-	
 		for(Turma t : turmasDisponiveis){
 		// Entra na lista de turmas disponíveis e pega uma turma
 			
+			
 			for (SalaAula s : salasDisponiveis){
 				// Entra na lista de salas disponíveis e pega uma sala
-				indice += 1;
 				
 				if (t.getQuantAlunos() <= 20 && s.getCapacidade() <= 20){
 					// Verifica se a turma e a sala são pequenas
@@ -196,7 +212,7 @@ public class AdministradorService {
 					salaDAO.salvar(s);
 					// Salva os resultados no banco, fazendo o UPDATE
 					
-					salasDisponiveis.remove(indice);
+					salasDisponiveis.remove(s);
 					// Remove essa sala da lista de salas disponíveis
 					
 					tAloc += 1;
@@ -278,26 +294,116 @@ public class AdministradorService {
 		
 		return mensagens;
 	}
-
-	public SalaAula interditarSala(SalaAula sala){
+	
+	public Map<String, Object> alocarManualmente(Turma turma, SalaAula sala){
+		
+		Turma turmaAlocada = buscarPorDisciplina(turma);
+		SalaAula salaAlocada = buscarPorNumero(sala);
+		
+		String msgError = "TURMA OU SALA INDISPONÍVEL!";
+		String msgSucess = null;
+		
+		if (turmaAlocada.getStatus().equals("disponível") && 
+				salaAlocada.getStatus().equals("disponível")){
+			
+			if (turmaAlocada.getQuantAlunos() <= salaAlocada.getCapacidade()){
+				
+				turmaAlocada.setSala(salaAlocada);
+				turmaAlocada.setStatus("ocupada");
+				salaAlocada.setStatus("ocupada");
+				turmaDAO.salvar(turmaAlocada);
+				salaDAO.salvar(salaAlocada);
+				
+				msgSucess = "Turma " + turmaAlocada.getDisciplina().toUpperCase() + " Alocada na sala: " + salaAlocada.getNumero() + " com sucesso!";
+				msgError = null;
+				
+			}
+			
+			msgError = "QUANTIDADE DE ALUNOS MAIOR DO QUE A CAPACIDADE DA SALA";
+			
+		}
+		
+		Map<String, Object> mensagens = new HashMap<String, Object>();
+		
+		mensagens.put("msgSucess", msgSucess);
+		mensagens.put("msgError", msgError);
+		
+		return mensagens;
+	}
+	
+	public Map<String, Object> realocarTurma(Turma turma, SalaAula sala){
+		
+		Turma turmaAlocada = buscarPorDisciplina(turma);
+		SalaAula salaAlocada = buscarPorNumero(sala);
+		SalaAula salaOcupada = new SalaAula();
+		
+		String msgError = "SALA INDISPONÍVEL!";
+		String msgSucess = null;
+		String msgStatus = null;
+		
+		salaOcupada.setNumero(turmaAlocada.getSala().getNumero());
+		// Objeto salaOcupada recebe o numero da sala que a turma estiver alocada
+		
+		SalaAula salaDesalocada = buscarPorNumero(salaOcupada);
+		// salaDesalocada recebe a sala encontrada no banco
+		
+		if (salaAlocada.getStatus().equals("disponível")){
+			// verifica se apenas se a sala está disponível
+			
+			if (turmaAlocada.getQuantAlunos() <= salaAlocada.getCapacidade()){
+				
+				turmaAlocada.setSala(salaAlocada);
+				turmaAlocada.setStatus("ocupada");
+				salaAlocada.setStatus("ocupada");
+				
+				salaDesalocada.setStatus("disponível");
+				//muda o status da sala que a turma realocada saiu para disponível
+				
+				turmaDAO.salvar(turmaAlocada);
+				salaDAO.salvar(salaAlocada);
+				salaDAO.salvar(salaDesalocada);
+				
+				//Salva os registros no banco de dados
+				
+				msgSucess = "Turma " + turmaAlocada.getDisciplina().toUpperCase() + " Realocada na sala: " + salaAlocada.getNumero() + " com sucesso!";
+				msgStatus = "Sala " + salaDesalocada.getNumero() + " foi desalocada e está disponível!";
+				msgError = null;
+				
+			}
+			
+			msgError = "QUANTIDADE DE ALUNOS MAIOR DO QUE A CAPACIDADE DA SALA";
+			
+		}
+		
+		Map<String, Object> mensagens = new HashMap<String, Object>();
+		
+		mensagens.put("msgSucess", msgSucess);
+		mensagens.put("msgError", msgError);
+		mensagens.put("msgStatus", msgStatus);
+		
+		return mensagens;
+	}
+	
+	public Map<String, Object> interditarSala(SalaAula sala){
 		
 		SalaAula salaInterditada = buscarPorNumero(sala);
-		List<Turma> turmas = buscarTodasTurmas();
+		List<Turma> turmas = buscarTurmasOcupadas();
+		String msgSucess = null;
+		String msgStatus = null;
 		
 		for (Turma t : turmas) {
-			
+			//Pega a turma do banco 
+		
 				if (t.getSala().getNumero() == salaInterditada.getNumero()){
-					// Verifica se alguma turma está na sala que será interditada
-					System.out.println("ENCONTROU A TURMA " + t.getDisciplina());
+					// Verifica se a turma está alocada na sala que será interditada
 					
 					t.setStatus("disponível");
 					t.setSala(null);
 					turmaDAO.salvar(t);
-					/* 
-						 * A turma fica disponível, uma vez que a sala
-						 * que ela estava alocada se interdita
-					 */
+					/* A turma fica disponível, uma vez que a sala
+					 * que ela estava alocada se interdita */
 					
+					msgStatus = "Turma : " + t.getDisciplina().toUpperCase() + " foi desalocada e está disponível!";
 					
 					break;
 				}
@@ -305,10 +411,35 @@ public class AdministradorService {
 		
 		salaInterditada.setStatus("interditada");
 		salaDAO.salvar(salaInterditada);
-		// Caso nenhuma turma esteja alocada na sala, apenas interdita a mesma
+		// interdita a sala
 		
+		msgSucess = "SALA INTERDITADA COM SUCESSO!";
 		
+		Map<String, Object> models = new HashMap<String, Object>();
 		
-		return salaInterditada;
+		models.put("msgSucess", msgSucess);
+		models.put("msgStatus", msgStatus);
+		models.put("salaSelect", salaInterditada);
+		
+		return models;
+	}
+
+	public Map<String, Object> desinterditarSala(SalaAula sala){
+		
+		SalaAula salaDesinterditada = buscarPorNumero(sala);
+		String msgSucess = null;
+		
+		salaDesinterditada.setStatus("disponível");
+		salaDAO.salvar(salaDesinterditada);
+		// Desinterdita a sala
+		
+		msgSucess = "SALA DESINTERDITADA COM SUCESSO!";
+		
+		Map<String, Object> models = new HashMap<String, Object>();
+		
+		models.put("msgSucess", msgSucess);
+		models.put("salaSelect", salaDesinterditada);
+		
+		return models;	
 	}
 }

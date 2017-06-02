@@ -95,8 +95,8 @@
 						<c:choose>
 						
 							<c:when test="${turma.status == 'disponível'}">	 
-								<form action="" method="POST">
-									<input type="hidden" name="id" value="<c:out value="${turma.id}"/>" >
+								<form action="/administrador/alocacao-manual-turma.html" method="POST">
+									<input type="hidden" name="disciplina" value="<c:out value="${turma.disciplina}"/>" >
 									<button class="button-custom">Alocar</button>
 								</form>
 								<div class="margin10"></div>
@@ -112,8 +112,8 @@
 									<button disabled class="button-custom not-able">Alocar</button>
 								</form>
 								<div class="margin10"></div>
-								<form action ="" method="POST">
-									<input type="hidden" name="id" value="<c:out value="${turma.id}"/>" >
+								<form action ="/administrador/realocacao.html" method="POST">
+									<input type="hidden" name="disciplina" value="<c:out value="${turma.disciplina}"/>" >
 									<button class="button-custom">Realocar</button>
 								</form>
 						 	 </c:otherwise>

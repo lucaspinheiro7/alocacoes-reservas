@@ -102,10 +102,6 @@
 				<label class="col s12 dynamic-label-red">Capacidade <c:out value="${lab.capacidade}"/> Alunos</label>
 				<div class=" col s12 m10 offset-m1 l10 offset-l1 margin10">
 					<form>
-						<button class="button-custom">Alocar</button>
-					</form>
-					<div class="margin10"></div>
-					<form>
 						<button class="button-custom">Reservar</button>
 					</form>
 					<div class="margin10"></div>

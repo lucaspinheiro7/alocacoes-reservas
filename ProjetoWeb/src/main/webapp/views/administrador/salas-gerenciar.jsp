@@ -21,6 +21,10 @@
 <link type="text/css" rel="stylesheet"
 	href="/assets/css/custom-page.css" media="screen,projection" />
 </head>
+<style>
+	.font-alert{ font-size: 15px; font-weight: bold;}
+	.resize-alert{ width: 100%; height: 50px; line-height: 50px; }
+</style>
 <body>
 	<c:set var="admin" value="${sessionScope['adminAutenticado']}" />
 	<header id="cabecalho">
@@ -96,24 +100,32 @@
 	</nav>
 	
 	<c:set var="msgSucess" value="${msgSucess}" />
+		<c:if test="${msgSucess != null}">
+			<div class="row remove-margin">
+		      	<div class="col s12 m8 offset-m2 l8 offset-l2">
+		        	<div class="card-panel green darken-1 resize-alert center-align valign-wrapper">
+			    		<span style="width: 100%;" class="white-text font-alert">
+			         		<c:out value="${msgSucess}"/><br>
+			       	 	</span>
+		       		 </div>
+		     	 </div>
+		    </div>
+		</c:if>
+		<c:if test="${msgStatus != null}">
+			<div style="margin-bottom: 10px;;" class="row">
+		      	<div class="col s12 m8 offset-m2 l8 offset-l2">
+		        	<div class="card-panel yellow darken-3 resize-alert center-align valign-wrapper">
+			    		<span style="width: 100%;" class="white-text font-alert">
+			         		<c:out value="${msgStatus}"/><br>
+			       	 	</span>
+		       		 </div>
+		     	 </div>
+		    </div>
+		</c:if>
 	
 	<div class="row">
 		<div class="col s12 m4 offset-m4 l4 offset-l4">
 			<div class="col s12 m8 offset-m2 l8 offset-l2">
-			
-			
-			  		<c:if test="${msgSucess != null}">
-						<div style="margin-bottom: 0;" class="row">
-					      	<div class="col s12 m8 offset-m2 l8 offset-l2">
-					        	<div class="card-panel green darken-1 resize-alert center-align valign-wrapper">
-						    		<span style="width: 100%;" class="white-text font-alert">
-						         		<c:out value="${msgSucess}"/><br>
-						       	 	</span>
-					       		 </div>
-					     	 </div>
-					    </div>
-					</c:if>
-			
 			
 				<!-- Menu de exibição para sala selecionada -->
 				<img id="img-sala" class="responsive-img" src="/assets/img/sala-<c:out value="${sala.status}"/>.png"> 
@@ -145,7 +157,8 @@
 							<button disabled class="button-custom not-able">Reservar</button>
 						</form>
 						<div class="margin10"></div>
-						<form>
+						<form action="/administrador/desinterditar-sala.html" method="POST">
+							<input type="hidden" name="numero" value="<c:out value="${sala.numero}"/>">
 							<button class="button-custom">Desinterditar</button>
 						</form>
 					</c:when>

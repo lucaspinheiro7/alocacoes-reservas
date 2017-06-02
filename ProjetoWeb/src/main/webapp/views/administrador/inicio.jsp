@@ -79,7 +79,8 @@
 	<div class="row">
 		<div class="col s11 offset-m1 offset-m1">
 			<!-- Tabela que apresentará os resultados que virão do banco de dados -->
-
+		<c:set var="msg" value="${fn:toUpperCase('Nenhuma Turma disponível até o  momento')}"/>	
+		
 			<c:forEach var="turma" items="${turmas}">
 			
 			<form action="/administrador/turmas-gerenciar.html" method="POST">
@@ -141,7 +142,13 @@
 				</form>
 
 			</c:forEach>
+			
 		</div>
+			<c:if test="${turmas.size() == 0}">
+				<label class="col s12 dynamic-label margin-top20">
+					<c:out value="${msg}"/>
+				</label>
+			</c:if>
 	</div>
 	</main>
 	<footer class="page-footer grey lighten-1">
