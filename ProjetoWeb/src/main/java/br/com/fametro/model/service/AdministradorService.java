@@ -1,8 +1,6 @@
 package br.com.fametro.model.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,12 +11,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.fametro.model.dao.AdministradorDAO;
 import br.com.fametro.model.dao.LaboratorioDAO;
-import br.com.fametro.model.dao.ReservaLabDAO;
 import br.com.fametro.model.dao.SalaAulaDAO;
 import br.com.fametro.model.dao.TurmaDAO;
 import br.com.fametro.model.entity.Administrador;
 import br.com.fametro.model.entity.Laboratorio;
-import br.com.fametro.model.entity.ReservaLab;
 import br.com.fametro.model.entity.SalaAula;
 import br.com.fametro.model.entity.Turma;
 
@@ -36,9 +32,6 @@ public class AdministradorService {
 	
 	@Inject
 	private LaboratorioDAO labDAO;
-	
-	@Inject
-	private ReservaLabDAO reservaLabDAO;
 	
 	public void salvar(Administrador administrador){
 		adminDAO.salvar(administrador);

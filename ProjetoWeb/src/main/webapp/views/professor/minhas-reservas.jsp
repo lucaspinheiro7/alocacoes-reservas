@@ -1,7 +1,9 @@
+<%@page import="br.com.fametro.model.entity.Administrador"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,12 +36,12 @@
 		<!-- Estrutura Dropdown para Tablets e Desktops -->
 		<ul id="dropdown1" class="dropdown-custom">
 			<li><a href="<c:url value ='/professor/reservar.html'/>">Reservar</a></li>
-			<li><a href="<c:url value ='/professor/minhas-reservas.html'/>">Minhas Reservas</a></li>
+			<li ><a href="<c:url value ='/professor/minhas-reservas.html'/>">Minhas Reservas</a></li>
 		</ul>
 		<!-- Estrutura Dropdown para dispositivos Móveis -->
 		<ul id="dropdown2" class="dropdown-content-mobile">
-			<li><a href="<c:url value ='/professor/minhas-reservas.html'/>">Reservar</a></li>
-			<li><a href="<c:url value ='/professor/minhas-reservas.html'/>">Minhas Reservas</a></li>
+			<li><a href="<c:url value ='/professor/reservar.html'/>">Reservar</a></li>
+			<li ><a href="<c:url value ='/professor/minhas-reservas.html'/>">Minhas Reservas</a></li>
 		</ul>
 		<nav class="green darken-custom">
 			<div class="nav-wrapper">
@@ -48,10 +50,10 @@
 					class="material-icons">menu</i></a>
 				<!-- Menu para Desktops -->
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li class="active"><a
-						class="itens-resize itens-width indicator" href="<c:url value ='/professor/inicio.html'/>">Início</a></li>
+					<li ><a
+						class="itens-resize itens-width" href="<c:url value ='/professor/inicio.html'/>">Início</a></li>
 					<!-- Dropdown Trigger para Desktops -->
-					<li class="itens-even"><a class="dropdown-button itens-resize"
+					<li class="itens-even"><a class="dropdown-button itens-resize indicator"
 						href="" data-activates="dropdown1">Reservas <i
 							class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a class="itens-resize itens-width" href="<c:url value ='/professor/salas.html'/>">Salas</a></li>
@@ -60,9 +62,9 @@
 				</ul>
 				<!-- Menu para Tables e Dispositivos Móveis -->
 				<ul id="menu-mobile" class="side-nav">
-					<li class="active"><a href="<c:url value ='/professor/inicio.html'/>">Início</a></li>
+					<li><a href="<c:url value ='/professor/inicio.html'/>">Início</a></li>
 					<!-- Dropdown Trigger para Tablets e dispositivos Móveis-->
-					<li><a class="dropdown-button" href=""
+					<li><a class="dropdown-button indicator" href=""
 						data-activates="dropdown2">Reservas <i
 							class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a href="<c:url value ='/professor/salas.html'/>">Salas</a></li>
@@ -73,65 +75,62 @@
 		</nav>
 	</header>
 	<main> 
-	<div class="row">
-		<div class="col s11 offset-m1 offset-m1">
-			<!-- Tabela que apresentará os resultados que virão do banco de dados -->
-		<c:set var="msg" value="${fn:toUpperCase('Nenhum laboratório disponível até o momento')}"/>	
-		
-			<c:forEach var="lab" items="${labs}">
+		<div class="row">
+		<c:set var="msg" value="${fn:toUpperCase('Nenhuma Reserva feita até o momento')}"/>	
+		<c:if test="${reservas.size() != 0}">
+
+			<div class="col s11 offset-m1 offset-m1">
 			
-			<form action="/professor/laboratorios-gerenciar.html" method="POST">
+				<c:forEach var="reserva" items="${reservas}">
+			
+				<form action="" method="POST">
 
-				<table class="col s12 m4 l2 margin20">
-
-						<thead class="remove-border">
+					<table class="col s12 m4 l2 margin20">
+					
+						<thead class="remove-border"> 
 							<tr>
 								<td>
-									<!-- Imagem com tag de disponibilidade --> 
-									<img id="img-lab" class="responsive-img" src="/assets/img/laboratorio-<c:out value="${lab.status}"/>.png">
+									<img class="responsive-img" src="/assets/img/laboratorio.jpg">
+																							
 								</td>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<!-- Nome da turma com botão gerenciar -->
-									<div class="col s12">
-							       		<marquee scrolldelay=50 >
-											<label class="col s12 dynamic-label">LABORATÓRIO <c:out value="${lab.numero}"></c:out></label>
-											<input type="hidden" name="numero" value="<c:out value="${lab.numero}"/>">
-										</marquee>
+						  	<tr>
+						       	<td>
+						       		<div class="col s12">
+										<label class="col s12 dynamic-label">LABORATÓRIO <c:out value="${reserva.laboratorio.numero }"/></label>
 									</div>
-									<c:choose>
-										<c:when test="${lab.status != 'interditado'}">
-											<button class="button-custom">Reservar</button>
-										</c:when>
-										<c:otherwise>
-											<button class="button-custom not-able" disabled>Reservar</button>
-										</c:otherwise>
-									</c:choose>
+										<label class="col s12 dynamic-label">DATA: 
+											<label class="dynamic-label-red">
+												<c:set var = "data" value = "${reserva.dataReserva}" />
+												<fmt:formatDate type ="date" dateStyle ="short" value ="${data}"/>
+											</label>
+										</label>		
 								</td>
 							</tr>
 						</tbody>
-						
+					
 					</table>
 				
 				</form>
-
-			</c:forEach>
-			
-		</div>
-			<c:if test="${labs.size() == 0}">
-			<nav class="transparent-bg">
-			    <div class="row margin10">
-			      	<div class="col s12">
-			      	</div>
-			    </div>
-		  	</nav>
-				<label class="col s12 dynamic-label margin-top20">
-					<c:out value="${msg}"/>
-				</label>
-			</c:if>
+				
+				</c:forEach>
+				
+			</div>
+	  	</c:if>
+			  
+		<c:if test="${reservas.size() == 0}">
+		<nav class="transparent-bg">
+		    <div class="row margin10">
+		      	<div class="col s12">
+		      	</div>
+		    </div>
+	  	</nav>
+			<label class="col s12 dynamic-label margin-top20">
+				<c:out value="${msg}"/>
+			</label>
+		</c:if>
 	</div>
 	</main>
 	<footer class="page-footer grey lighten-1">

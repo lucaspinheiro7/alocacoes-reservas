@@ -172,7 +172,6 @@
 			</c:if>
 		  	</div>
 		</main>
-
 	<footer class="page-footer grey lighten-1">
        	<div class="footer-copyright green darken-5">
             <div class="container">

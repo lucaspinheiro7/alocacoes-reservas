@@ -48,19 +48,19 @@
 					class="material-icons">menu</i></a>
 				<!-- Menu para Desktops -->
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li class="active"><a
-						class="itens-resize itens-width indicator" href="<c:url value ='/professor/inicio.html'/>">Início</a></li>
+					<li ><a
+						class="itens-resize itens-width" href="<c:url value ='/professor/inicio.html'/>">Início</a></li>
 					<!-- Dropdown Trigger para Desktops -->
 					<li class="itens-even"><a class="dropdown-button itens-resize"
 						href="" data-activates="dropdown1">Reservas <i
 							class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a class="itens-resize itens-width" href="<c:url value ='/professor/salas.html'/>">Salas</a></li>
-					<li><a class="itens-resize itens-width" href="<c:url value ='/professor/turmas.html'/>">Turmas</a></li>
+					<li><a class="itens-resize itens-width indicator" href="<c:url value ='/professor/turmas.html'/>">Turmas</a></li>
 					<li><a class="itens-resize logout-width" href="<c:url value ='../logout.html'/>">Sair</a></li>
 				</ul>
 				<!-- Menu para Tables e Dispositivos Móveis -->
 				<ul id="menu-mobile" class="side-nav">
-					<li class="active"><a href="<c:url value ='/professor/inicio.html'/>">Início</a></li>
+					<li ><a href="<c:url value ='/professor/inicio.html'/>">Início</a></li>
 					<!-- Dropdown Trigger para Tablets e dispositivos Móveis-->
 					<li><a class="dropdown-button" href=""
 						data-activates="dropdown2">Reservas <i
@@ -72,68 +72,39 @@
 			</div>
 		</nav>
 	</header>
-	<main> 
-	<div class="row">
-		<div class="col s11 offset-m1 offset-m1">
-			<!-- Tabela que apresentará os resultados que virão do banco de dados -->
-		<c:set var="msg" value="${fn:toUpperCase('Nenhum laboratório disponível até o momento')}"/>	
-		
-			<c:forEach var="lab" items="${labs}">
-			
-			<form action="/professor/laboratorios-gerenciar.html" method="POST">
-
-				<table class="col s12 m4 l2 margin20">
-
-						<thead class="remove-border">
-							<tr>
-								<td>
-									<!-- Imagem com tag de disponibilidade --> 
-									<img id="img-lab" class="responsive-img" src="/assets/img/laboratorio-<c:out value="${lab.status}"/>.png">
-								</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<!-- Nome da turma com botão gerenciar -->
-									<div class="col s12">
-							       		<marquee scrolldelay=50 >
-											<label class="col s12 dynamic-label">LABORATÓRIO <c:out value="${lab.numero}"></c:out></label>
-											<input type="hidden" name="numero" value="<c:out value="${lab.numero}"/>">
-										</marquee>
-									</div>
-									<c:choose>
-										<c:when test="${lab.status != 'interditado'}">
-											<button class="button-custom">Reservar</button>
-										</c:when>
-										<c:otherwise>
-											<button class="button-custom not-able" disabled>Reservar</button>
-										</c:otherwise>
-									</c:choose>
-								</td>
-							</tr>
-						</tbody>
-						
-					</table>
-				
-				</form>
-
-			</c:forEach>
-			
-		</div>
-			<c:if test="${labs.size() == 0}">
+	<main>
+		<c:set var="turma" value="${turma}" />
+		<!-- Breadcrumb -->
 			<nav class="transparent-bg">
 			    <div class="row margin10">
 			      	<div class="col s12">
 			      	</div>
 			    </div>
 		  	</nav>
-				<label class="col s12 dynamic-label margin-top20">
-					<c:out value="${msg}"/>
-				</label>
-			</c:if>
-	</div>
-	</main>
+			<div class="row">
+				<div class="col s12 m4 offset-m4 l4 offset-l4">
+					<div class="col s12 m8 offset-m2 l8 offset-l2">
+					<!-- Menu de exibição para turma selecionada-->
+					
+					
+						<img id="img-ads" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
+						
+						<label class="col s12 dynamic-label"><c:out value="${fn:toUpperCase(turma.disciplina)}"></c:out></label>
+						<label class="col s12 dynamic-label-red"><c:out value="${turma.quantAlunos}"></c:out> ALUNOS</label>
+						<label class="col s12 dynamic-label">Professor(a): 
+								<label class="dynamic-label-red"><c:out value="${turma.professor.nome}"></c:out></label>
+						</label>
+						<c:if test="${turma.sala != null}">
+							<label class="col s12 dynamic-label">SALA 
+									<label class="dynamic-label-red"><c:out value="${turma.sala.numero}"></c:out></label>
+							</label>
+						</c:if>
+						<div class=" col s12 m10 offset-m1 l10 offset-l1 margin10">
+						</div>	
+					</div>
+				</div>
+			</div>
+		</main>
 	<footer class="page-footer grey lighten-1">
 		<div class="footer-copyright green darken-5">
 			<div class="container">

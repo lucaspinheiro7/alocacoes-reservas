@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.fametro.model.entity.Administrador;
+import br.com.fametro.model.entity.Laboratorio;
 import br.com.fametro.model.entity.Professor;
 import br.com.fametro.model.entity.Turma;
 import br.com.fametro.model.service.AdministradorService;
 import br.com.fametro.model.service.LoginService;
+import br.com.fametro.model.service.ProfessorService;
 
 @Controller
 public class LoginController {
@@ -25,6 +27,9 @@ public class LoginController {
 	
 	@Inject
 	AdministradorService adminService;
+	
+	@Inject
+	ProfessorService profService;
 	
 	@RequestMapping("/login")
 	public ModelAndView login(){
@@ -56,20 +61,11 @@ public class LoginController {
 			
 			if (adminAutenticado != null){
 				
-				//Map<String, Object> models = new HashMap<String, Object>();
-				
 				List<Turma> turmas = adminService.buscarTurmasDisponiveis(); 
 				
 				session.setAttribute("adminAutenticado", adminAutenticado);
-				
-				//models.put("adminAutenticado", adminAutenticado);
-			    //models.put("turmas", turmas);
-			    
 			    
 			   return new ModelAndView("/administrador/inicio", "turmas", turmas);
-
-			} else {
-				return loginError();
 			}
 
 		} else if (identificador == 2){
@@ -77,9 +73,13 @@ public class LoginController {
 			Professor profAutenticado = loginService.validar(prof);
 			
 			if (profAutenticado != null){
-				return new ModelAndView("/professor/inicio", "profAutenticado", profAutenticado);
+				
+				session.setAttribute("profAutenticado", profAutenticado);
+			    
+				List<Laboratorio> labs = profService.buscarTodosLaboratorios();
+				
+				return new ModelAndView("/professor/inicio", "labs", labs);
 			}
-			return loginError();
 		}
 		
 		return loginError();
