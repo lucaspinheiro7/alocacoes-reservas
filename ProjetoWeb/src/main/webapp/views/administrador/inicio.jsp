@@ -76,6 +76,12 @@
 		</nav>
 	</header>
 	<main> 
+	<nav class="transparent-bg">
+	    <div class="row margin10">
+	      	<div class="col s12">
+	      	</div>
+	    </div>
+  	</nav>
 	<div class="row">
 		<div class="col s11 offset-m1 offset-m1">
 			<!-- Tabela que apresentará os resultados que virão do banco de dados -->

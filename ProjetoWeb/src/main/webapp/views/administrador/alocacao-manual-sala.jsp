@@ -112,47 +112,19 @@
 		  	<c:set var="msg2" value="${fn:toUpperCase('Nenhuma Sala disponível até o  momento')}"/>	
 		  	<div class="row">
 			  	<div class="container">
-			  	<c:if test="${salas.size() != 0}">
-			  		<form action="/administrador/alocar-manualmente-turma.html" method="POST">
+			  	<c:if test="${turmas.size() != 0}">
+			  		<form action="/administrador/alocar-manualmente-sala.html" method="POST">
 			  		
 					  	<div class="col s12">
 					  		<div class="col s12 m3 offset-m2 l3 offset-l2">
 					  		<!-- Seleção de turma -->
 					  			<label class="col s12 dynamic-label">TURMA</label>
-					  			<c:choose>
-										<c:when test="${turma.curso.nome == 'Análise e Desenvolvimento de Sistemas'}">
-											<img id="img-ads" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
-										</c:when>
-										<c:when test="${turma.curso.nome == 'Gestão Comercial'}">
-											<img id="img-gescom" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
-										</c:when>
-										<c:when test="${turma.curso.nome == 'Odontologia'}">
-											<img id="img-odonto" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
-										</c:when>
-										<c:when test="${turma.curso.nome == 'Sistemas de Informação'}">
-											<img id="img-sisinf" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
-										</c:when>
-										<c:when test="${turma.curso.nome == 'Gestão de Recursos Humanos'}">
-											<img id="img-gesrh" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
-										</c:when>
-										<c:when test="${turma.curso.nome == 'Administração'}">
-											<img id="img-adm" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
-										</c:when>
-										<c:when test="${turma.curso.nome == 'Psicologia'}">
-											<img id="img-psic" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
-										</c:when>
-										<c:otherwise>
-											<img id="img-dir" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
-										</c:otherwise>
-									</c:choose>
-					  			
-									<label class="col s12 dynamic-label">
-										<marquee scrolldelay=100 >
-											<c:out value="${fn:toUpperCase(turma.disciplina)}"></c:out>
-											<input type="hidden" name="disciplina" value="<c:out value="${turma.disciplina}"/>" >
-										</marquee>
-									</label>
-							    
+					  			<img class="responsive-img" src="/assets/img/curso-disciplina.jpg">
+							    <select class="white-bg" name="disciplina">
+							    	<c:forEach var="turma" items="${turmas}">
+							     		<option value="<c:out value="${turma.disciplina}"/>"> <c:out value="${fn:toUpperCase(turma.disciplina)}"/></option>
+							     	</c:forEach>	
+					    		</select>  
 					  		</div>
 					  		<div class="col s12 m2 l2">
 					  			<div class="col s12 m8 offset-m2 l8 offset-l2 hide-on-small-only">
@@ -167,12 +139,13 @@
 					  		<div class="col s12 m3 l3 ">
 					  		<!-- Seleção de Sala -->
 					  			<label class="col s12 dynamic-label">SALA</label>
-					  			<img class="responsive-img" src="/assets/img/sala.jpg">
-					  			<select class="white-bg" name="numero">
-							     	<c:forEach var="sala" items="${salas}">
-							     		<option value="<c:out value="${sala.numero}"/>"> SALA <c:out value="${fn:toUpperCase(sala.numero)}"/></option>
-							     	</c:forEach>	
-					    		</select>  
+					  			<img id="img-sala" class="responsive-img" src="/assets/img/sala-<c:out value="${sala.status}"/>.png">
+					  			<label class="col s12 dynamic-label">
+									<marquee scrolldelay=100 >
+										SALA <c:out value="${sala.numero}"></c:out>
+										<input type="hidden" name="numero" value="<c:out value="${sala.numero}"/>" >
+									</marquee>
+								</label>
 					  		</div>
 					  	</div>
 					  	<div class="row">
@@ -183,9 +156,11 @@
 						  	</div>
 					  	</div>
 					</form>
-					</c:if>	
+					
+				</c:if>	
 				</div>
-				<c:if test="${turmas.size() == 0}">
+		
+			<c:if test="${turmas.size() == 0}">
 				<label class="col s12 dynamic-label margin-top20">
 					<c:out value="${msg1}"/>
 				</label>

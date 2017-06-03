@@ -73,12 +73,9 @@
 		</nav>
 	</header>
 		<main>
-			<!-- Breadcrumb -->
 			<nav class="transparent-bg">
 			    <div class="row margin10">
 			      	<div class="col s12">
-				        <a href="#!" class="breadcrumb green-darken-6">Alocação</a>
-				        <a href="#!" class="breadcrumb green-darken-6">Alocação Manual</a>
 			      	</div>
 			    </div>
 		  	</nav>

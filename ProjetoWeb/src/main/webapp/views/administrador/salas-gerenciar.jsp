@@ -88,13 +88,10 @@
 		</nav>
 	</header>
 	<main>
-	<c:set var="sala" value="${salaSelect}" /> <!-- Breadcrumb -->
+	<c:set var="sala" value="${sala}" />
 	<nav class="transparent-bg">
 		<div class="row margin10">
 			<div class="col s12">
-				<a href="<c:url value ='/administrador/salas.html'/>"
-					class="breadcrumb green-darken-6">Salas</a> <a href="#!"
-					class="breadcrumb green-darken-6">Gerenciar</a>
 			</div>
 		</div>
 	</nav>
@@ -135,12 +132,9 @@
 				<c:choose>
 				
 					<c:when test="${sala.status == 'disponível'}">
-						<form>
+						<form action="/administrador/alocacao-manual-sala.html" method="POST">
+							<input type="hidden" name="numero" value="<c:out value="${sala.numero}"/>">
 							<button class="button-custom">Alocar</button>
-						</form>
-						<div class="margin10"></div>
-						<form>
-							<button class="button-custom">Reservar</button>
 						</form>
 						<div class="margin10"></div>
 						<form action="/administrador/interditar-sala.html" method="POST">
@@ -153,10 +147,6 @@
 							<button disabled class="button-custom not-able">Alocar</button>
 						</form>
 						<div class="margin10"></div>
-						<form>
-							<button disabled class="button-custom not-able">Reservar</button>
-						</form>
-						<div class="margin10"></div>
 						<form action="/administrador/desinterditar-sala.html" method="POST">
 							<input type="hidden" name="numero" value="<c:out value="${sala.numero}"/>">
 							<button class="button-custom">Desinterditar</button>
@@ -165,10 +155,6 @@
 					<c:otherwise>
 							<form>
 							<button disabled class="button-custom not-able">Alocar</button>
-						</form>
-						<div class="margin10"></div>
-						<form>
-							<button disabled class="button-custom not-able">Reservar</button>
 						</form>
 						<div class="margin10"></div>
 						<form action="/administrador/interditar-sala.html" method="POST">

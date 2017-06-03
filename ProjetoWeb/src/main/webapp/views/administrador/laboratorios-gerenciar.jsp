@@ -83,39 +83,46 @@
 		</nav>
 	</header>
 	<main>
-	<c:set var="lab" value="${labSelect}" /> <!-- Breadcrumb -->
+	<c:set var="lab" value="${lab}" />
 	<nav class="transparent-bg">
 		<div class="row margin10">
 			<div class="col s12">
-				<a href="<c:url value ='/administrador/salas.html'/>"
-					class="breadcrumb green-darken-6">Salas</a> <a href="#!"
-					class="breadcrumb green-darken-6">Gerenciar</a>
 			</div>
 		</div>
 	</nav>
+	<c:set var="msgSucess" value="${msgSucess}" />
+		<c:if test="${msgSucess != null}">
+			<div class="row remove-margin">
+		      	<div class="col s12 m8 offset-m2 l8 offset-l2">
+		        	<div class="card-panel green darken-1 resize-alert center-align valign-wrapper">
+			    		<span style="width: 100%;" class="white-text font-alert">
+			         		<c:out value="${msgSucess}"/><br>
+			       	 	</span>
+		       		 </div>
+		     	 </div>
+		    </div>
+		</c:if>
 	<div class="row">
 		<div class="col s12 m4 offset-m4 l4 offset-l4">
 			<div class="col s12 m8 offset-m2 l8 offset-l2">
 				<!-- Menu de exibição para sala selecionada -->
-				<img id="img-lab" class="responsive-img" src="/assets/img/sala-<c:out value="${lab.status}"/>.png"> 
+				<img id="img-lab" class="responsive-img" src="/assets/img/laboratorio-<c:out value="${lab.status}"/>.png"> 
 				<label class="col s12 dynamic-label">LABORATÓRIO <c:out value="${lab.numero}"/></label> 
 				<label class="col s12 dynamic-label-red">Capacidade <c:out value="${lab.capacidade}"/> Alunos</label>
 				<div class=" col s12 m10 offset-m1 l10 offset-l1 margin10">
-					<form>
-						<button class="button-custom">Reservar</button>
-					</form>
-					<div class="margin10"></div>
-					<c:choose>
-						<c:when test="${lab.status != 'interditado'}">	
-							<form>
-								<button class="button-custom">Interditar</button>
-							</form>
-						</c:when>
-						<c:otherwise>
-							<form>
-								<button class="button-custom">Desinterditar</button>
-							</form>
-						</c:otherwise>
+				<c:choose>
+					<c:when test="${lab.status != 'interditado'}">	
+						<form action="/administrador/interditar-laboratorio.html" method="POST">
+							<input type="hidden" name="numero" value="<c:out value="${lab.numero}"/>">
+							<button class="button-custom">Interditar</button>
+						</form>
+					</c:when>
+					<c:otherwise>
+						<form action="/administrador/desinterditar-laboratorio.html" method="POST">
+							<input type="hidden" name="numero" value="<c:out value="${lab.numero}"/>">
+							<button class="button-custom">Desinterditar</button>
+						</form>
+					</c:otherwise>
 					
 					</c:choose>
 				</div>

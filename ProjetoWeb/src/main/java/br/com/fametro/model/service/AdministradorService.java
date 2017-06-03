@@ -1,6 +1,8 @@
 package br.com.fametro.model.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Service;
 
 import br.com.fametro.model.dao.AdministradorDAO;
 import br.com.fametro.model.dao.LaboratorioDAO;
+import br.com.fametro.model.dao.ReservaLabDAO;
 import br.com.fametro.model.dao.SalaAulaDAO;
 import br.com.fametro.model.dao.TurmaDAO;
 import br.com.fametro.model.entity.Administrador;
 import br.com.fametro.model.entity.Laboratorio;
+import br.com.fametro.model.entity.ReservaLab;
 import br.com.fametro.model.entity.SalaAula;
 import br.com.fametro.model.entity.Turma;
 
@@ -32,6 +36,9 @@ public class AdministradorService {
 	
 	@Inject
 	private LaboratorioDAO labDAO;
+	
+	@Inject
+	private ReservaLabDAO reservaLabDAO;
 	
 	public void salvar(Administrador administrador){
 		adminDAO.salvar(administrador);
@@ -419,11 +426,30 @@ public class AdministradorService {
 		
 		models.put("msgSucess", msgSucess);
 		models.put("msgStatus", msgStatus);
-		models.put("salaSelect", salaInterditada);
+		models.put("sala", salaInterditada);
 		
 		return models;
 	}
 
+	public Map<String, Object> interditarLab(Laboratorio lab){
+		
+		Laboratorio labInterditado = buscarPorNumero(lab);
+		String msgSucess = null;
+		
+		labInterditado.setStatus("interditado");
+		labDAO.salvar(labInterditado);
+		// interdita o laboratorio
+		
+		msgSucess = "LABORATÓRIO INTERDITADO COM SUCESSO!";
+		
+		Map<String, Object> models = new HashMap<String, Object>();
+		
+		models.put("msgSucess", msgSucess);
+		models.put("lab", labInterditado);
+		
+		return models;
+	}
+	
 	public Map<String, Object> desinterditarSala(SalaAula sala){
 		
 		SalaAula salaDesinterditada = buscarPorNumero(sala);
@@ -438,8 +464,28 @@ public class AdministradorService {
 		Map<String, Object> models = new HashMap<String, Object>();
 		
 		models.put("msgSucess", msgSucess);
-		models.put("salaSelect", salaDesinterditada);
+		models.put("sala", salaDesinterditada);
 		
 		return models;	
 	}
+	
+	public Map<String, Object> desinterditarLab(Laboratorio lab){
+		
+		Laboratorio labDesinterditado = buscarPorNumero(lab);
+		String msgSucess = null;
+		
+		labDesinterditado.setStatus("disponível");
+		labDAO.salvar(labDesinterditado);
+		// Desinterdita a sala
+		
+		msgSucess = "LABORATÓRIO DESINTERDITADO COM SUCESSO!";
+		
+		Map<String, Object> models = new HashMap<String, Object>();
+		
+		models.put("msgSucess", msgSucess);
+		models.put("lab", labDesinterditado);
+		
+		return models;	
+	}
+
 }

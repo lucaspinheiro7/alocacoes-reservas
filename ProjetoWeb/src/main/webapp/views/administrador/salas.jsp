@@ -110,7 +110,7 @@
 							<tr>
 								<td>
 								<!-- Imagem com tag de disponibilidade -->
-									<img id="img-lab" class="responsive-img" src="/assets/img/sala-<c:out value="${lab.status}"/>.png">					
+									<img id="img-lab" class="responsive-img" src="/assets/img/laboratorio-<c:out value="${lab.status}"/>.png">					
 								</td>
 							</tr>
 						</thead>

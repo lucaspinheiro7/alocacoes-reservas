@@ -77,6 +77,20 @@ public class AdminController {
 		return new ModelAndView("/administrador/alocacao-manual-turma", models);
 	}
 	
+	@RequestMapping("/alocacao-manual-sala")
+	public ModelAndView alocacaoManualSala(SalaAula sala){
+		
+		SalaAula salaSelected = adminService.buscarPorNumero(sala);
+		List<Turma> turmas = adminService.buscarTurmasDisponiveis();
+		
+		Map<String, Object> models = new HashMap<String, Object>();
+		
+		models.put("sala", salaSelected);
+		models.put("turmas", turmas);
+		
+		return new ModelAndView("/administrador/alocacao-manual-sala", models);
+	}
+	
 	@RequestMapping("/realocacao")
 	public ModelAndView realocacaoTurma(Turma turma){
 		
@@ -125,7 +139,7 @@ public class AdminController {
 	 * 
 	 * @return /views/administrador/turams.jsp
 	 */
-	@RequestMapping("turmas")
+	@RequestMapping("/turmas")
 	public ModelAndView turmas(){
 		
 		List<Turma> turmas = adminService.buscarTodasTurmas();
@@ -139,7 +153,7 @@ public class AdminController {
 		
 		Turma turmaSelected = adminService.buscarPorDisciplina(turma);
 		
-		return new ModelAndView("administrador/turmas-gerenciar", "turmaSelect", turmaSelected);
+		return new ModelAndView("administrador/turmas-gerenciar", "turma", turmaSelected);
 	}
 	
 	/**
@@ -147,12 +161,12 @@ public class AdminController {
 	 * @param sala
 	 * @return /views/administrador/salas-gerenciar.jsp
 	 */
-	@RequestMapping("salas-gerenciar")
+	@RequestMapping("/salas-gerenciar")
 	public ModelAndView gerenciarSala(SalaAula sala){
 		
 		SalaAula salaSelected = adminService.buscarPorNumero(sala);
 		
-		return new ModelAndView("/administrador/salas-gerenciar", "salaSelect", salaSelected);
+		return new ModelAndView("/administrador/salas-gerenciar", "sala", salaSelected);
 	}
 	
 	/**
@@ -160,12 +174,26 @@ public class AdminController {
 	 * @param laboratorio
 	 * @return views/administrador/laboratorios-gerenciar.jsp
 	 */
-	@RequestMapping("laboratorios-gerenciar")
+	@RequestMapping("/laboratorios-gerenciar")
 	public ModelAndView gerenciarSala(Laboratorio laboratorio){
 		
 		Laboratorio labSelected = adminService.buscarPorNumero(laboratorio);
 		
-		return new ModelAndView("/administrador/laboratorios-gerenciar", "labSelect", labSelected);
+		return new ModelAndView("/administrador/laboratorios-gerenciar", "lab", labSelected);
+	}
+	
+	@RequestMapping("/reserva-laboratorio")
+	public ModelAndView reservarLab(Laboratorio lab){
+		
+		Laboratorio labSelected = adminService.buscarPorNumero(lab);
+		List<Turma> turmas = adminService.buscarTurmasDisponiveis();
+		
+		Map<String, Object> models = new HashMap<String, Object>();
+		
+		models.put("lab",labSelected);
+		models.put("turmas", turmas);
+		
+		return new ModelAndView("/administrador/reserva-laboratorio", models);
 	}
 	
 	/**
@@ -217,8 +245,10 @@ public class AdminController {
 		
 		Turma turmaSelected = adminService.buscarPorDisciplina(turma);
 		Map<String, Object> mensagens  = adminService.alocarManualmente(turmaSelected, sala);
-
+		
 		List<SalaAula> salas = adminService.buscarSalasDisponiveis();
+
+		
 		
 		Map<String, Object> models = new HashMap<String, Object>();
 		
@@ -227,6 +257,24 @@ public class AdminController {
 		models.put("mensagens", mensagens);
 		
 		return new ModelAndView("/administrador/alocacao-manual-turma", models);
+	}
+	
+	@RequestMapping("/alocar-manualmente-sala")
+	public ModelAndView alocarManualmenteSala(Turma turma, SalaAula sala){
+		
+		SalaAula salaSelected = adminService.buscarPorNumero(sala);
+		
+		Map<String, Object> mensagens  = adminService.alocarManualmente(turma, salaSelected);
+		
+		List<Turma> turmas = adminService.buscarTurmasDisponiveis();
+
+		Map<String, Object> models = new HashMap<String, Object>();
+		
+		models.put("sala", salaSelected);
+		models.put("turmas", turmas);
+		models.put("mensagens", mensagens);
+		
+		return new ModelAndView("/administrador/alocacao-manual-sala", models);
 	}
 	
 	@RequestMapping("/realocar-turma")
@@ -261,6 +309,15 @@ public class AdminController {
 		return new ModelAndView("/administrador/salas-gerenciar", models);
 	}
 	
+	@RequestMapping("/interditar-laboratorio")
+	public ModelAndView interditarLab(Laboratorio lab){
+		
+		Map<String, Object> models = adminService.interditarLab(lab);
+		
+		return new ModelAndView("/administrador/laboratorios-gerenciar", models);
+		
+	}
+	
 	/**
 	 * 
 	 * @param sala
@@ -272,6 +329,14 @@ public class AdminController {
 		Map<String, Object> models = adminService.desinterditarSala(sala);
 		
 		return new ModelAndView("/administrador/salas-gerenciar", models);
+	}
+	
+	@RequestMapping("/desinterditar-laboratorio")
+	public ModelAndView desinterditarLab(Laboratorio lab){
+		
+		Map<String, Object> models = adminService.desinterditarLab(lab);
+		
+		return new ModelAndView("/administrador/laboratorios-gerenciar", models);
 	}
 	
 }

@@ -63,13 +63,10 @@
 		</nav>
 	</header>
 		<main>
-		<c:set var="turma" value="${turmaSelect}" />
-		<!-- Breadcrumb -->
+		<c:set var="turma" value="${turma}" />
 			<nav class="transparent-bg">
 			    <div class="row margin10">
 			      	<div class="col s12">
-				        <a href="<c:url value ='/administrador/inicio.html'/>" class="breadcrumb green-darken-6">Início</a>
-				        <a href="#!" class="breadcrumb green-darken-6">Gerenciar</a>
 			      	</div>
 			    </div>
 		  	</nav>
