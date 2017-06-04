@@ -23,6 +23,10 @@
 	</bean>
 	
 	<mvc:resources mapping="/assets/**" location="/assets/"/>
+	
+	<mvc:interceptors>
+    	<bean class="br.com.fametro.interceptor.AutorizadorInterceptor" />
+	</mvc:interceptors>
 
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
