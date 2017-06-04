@@ -38,7 +38,7 @@
 		</ul>
 		<!-- Estrutura Dropdown para dispositivos Móveis -->
 		<ul id="dropdown2" class="dropdown-content-mobile">
-			<li><a href="<c:url value ='/professor/minhas-reservas.html'/>">Reservar</a></li>
+			<li><a href="<c:url value ='/professor/reservar.html'/>">Reservar</a></li>
 			<li><a href="<c:url value ='/professor/minhas-reservas.html'/>">Minhas Reservas</a></li>
 		</ul>
 		<nav class="green darken-custom">

@@ -19,8 +19,15 @@
 <link type="text/css" rel="stylesheet"
 	href="/assets/css/custom-page.css" media="screen,projection" />
 	<style type="text/css">
-		.hidden-over { max-height:20px; overflow: hidden; text-overflow: ellipsis;  }
+	select{ overflow-y:auto; }
+	 .font-alert{ font-size: 15px; font-weight: bold;}
+	 .resize-alert{ width: 100%; height: 50px; line-height: 50px; }
+	 .dropdown-content { max-height: 200px;}
+	 .select-wrapper input.select-dropdown {text-overflow: ellipsis;}
 	</style>
+
+
+
 </head>
 <body>
 	<c:set var="prof" value="${sessionScope['profAutenticado']}" />
@@ -51,11 +58,11 @@
 					<li ><a
 						class="itens-resize itens-width" href="<c:url value ='/professor/inicio.html'/>">Início</a></li>
 					<!-- Dropdown Trigger para Desktops -->
-					<li class="itens-even"><a class="dropdown-button itens-resize"
+					<li class="itens-even"><a class="dropdown-button itens-resize indicator"
 						href="" data-activates="dropdown1">Reservas <i
 							class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a class="itens-resize itens-width" href="<c:url value ='/professor/salas.html'/>">Salas</a></li>
-					<li><a class="itens-resize itens-width indicator" href="<c:url value ='/professor/turmas.html'/>">Turmas</a></li>
+					<li><a class="itens-resize itens-width" href="<c:url value ='/professor/turmas.html'/>">Turmas</a></li>
 					<li><a class="itens-resize logout-width" href="<c:url value ='../logout.html'/>">Sair</a></li>
 				</ul>
 				<!-- Menu para Tables e Dispositivos Móveis -->
@@ -73,37 +80,94 @@
 		</nav>
 	</header>
 	<main>
-		<c:set var="turma" value="${turma}" />
-		<!-- Breadcrumb -->
 			<nav class="transparent-bg">
 			    <div class="row margin10">
 			      	<div class="col s12">
 			      	</div>
 			    </div>
 		  	</nav>
-			<div class="row">
-				<div class="col s12 m4 offset-m4 l4 offset-l4">
-					<div class="col s12 m8 offset-m2 l8 offset-l2">
-					<!-- Menu de exibição para turma selecionada-->
+		  	<c:set var="msgSucess" value="${mensagens.msgSucess}" />
+		  	<c:set var="msgError" value="${mensagens.msgError}" />
+		  	
+		  	<c:choose>
+					<c:when test="${msgSucess != null}">
+						<div class="row remove-margin">
+					      	<div class="col s12 m8 offset-m2 l8 offset-l2">
+					        	<div class="card-panel green darken-1 resize-alert center-align valign-wrapper">
+						    		<span style="width: 100%;" class="white-text font-alert">
+						         		<c:out value="${msgSucess}"/><br>
+						       	 	</span>
+					       		 </div>
+					     	 </div>
+					    </div>
+					</c:when>
+					<c:when test="${msgError != null}">
+						<div style="margin-bottom: 0;" class="row">
+				     		<div class="col s12 m8 offset-m2 l8 offset-l2">
+				        		<div class="card-panel red darken-1 resize-alert center-align valign-wrapper">
+							    	<span style="width: 100%; font-size:12px;" class="white-text font-alert">
+						         		<c:out value="${msgError}"/><br>
+							       	</span>
+				        		</div>
+				      		</div>
+					    </div>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
+		  	<c:set var="msg1" value="${fn:toUpperCase('Nenhuma Laboratório disponível até o momento')}"/>	
+		  	<div class="row">
+			  	<div class="container">
+			  	<c:if test="${labs.size() != 0}">
+			  		<form action="/professor/efetuar-reserva.html" method="POST">
+			  		
+					  	<div class="col s12">
+					  		<div class="col s12 m3 offset-m2 l3 offset-l2">
+					  		<!-- Seleção de turma -->
+					  			<label class="col s12 dynamic-label">DATA DA RESERVA</label>
+					  			<img class="responsive-img" src="/assets/img/reserva.jpg">
+							    <div>
+					    			<input type="date" name="dataReserva" required>   
+					    		</div>
+					  		</div>
+					  		<div class="col s12 m2 l2">
+					  			<div class="col s12 m8 offset-m2 l8 offset-l2 hide-on-small-only">
+					  			<!-- Seta de indicação para tablets e Desktops -->
+						  			<i class="material-icons icon-custom green-darken-6 margin-top40">forward</i>
+						  		</div>
+						  		<div class="col s6 offset-s3 m8 offset-m2 l8 offset-l2 hide-on-med-and-up">
+						  		<!-- Seta de indicação para dispositivos móveis -->
+						  			<i class="material-icons icon-custom green-darken-6 remove-margin">arrow_downward</i>
+						  		</div>
+						  	</div>
+					  		<div class="col s12 m3 l3 ">
+					  		<!-- Seleção de Sala -->
+					  			<label class="col s12 dynamic-label">LABORATÓRIO</label>
+					  			<img class="responsive-img" src="/assets/img/laboratorio.jpg">
+					  			<select class="white-bg" name="numero">
+							     	<c:forEach var="lab" items="${labs}">
+							     		<option value="<c:out value="${lab.numero}"/>"> LABORATÓRIO <c:out value="${lab.numero}"/></option>
+							     	</c:forEach>	
+					    		</select>  
+					  		</div>
+					  	</div>
+					  	<div class="row">
+					  		<div class="col s12">
+						  		<div class="margin20 col s10 offset-s1 m4 offset-m4 l4 offset-l4">
+						  			<button class="button-custom">Reservar</button>
+						  		</div>
+						  	</div>
+					  	</div>
+					</form>
 					
-					
-						<img id="img-ads" class="responsive-img" src="/assets/img/turma-<c:out value="${turma.status}"/>.png">
-						
-						<label class="col s12 dynamic-label"><c:out value="${fn:toUpperCase(turma.disciplina)}"></c:out></label>
-						<label class="col s12 dynamic-label-red"><c:out value="${turma.quantAlunos}"></c:out> ALUNOS</label>
-						<label class="col s12 dynamic-label">Professor(a): 
-								<label class="dynamic-label-red"><c:out value="${turma.professor.nome}"></c:out></label>
-						</label>
-						<c:if test="${turma.sala != null}">
-							<label class="col s12 dynamic-label">SALA 
-									<label class="dynamic-label-red"><c:out value="${turma.sala.numero}"></c:out></label>
-							</label>
-						</c:if>
-						<div class=" col s12 m10 offset-m1 l10 offset-l1 margin10">
-						</div>	
-					</div>
+				</c:if>	
 				</div>
-			</div>
+			<c:if test="${labs.size() == 0}">
+				<label class="col s12 dynamic-label margin-top20">
+					<c:out value="${msg1}"/>
+				</label>
+			</c:if>
+		  	</div>
 		</main>
 	<footer class="page-footer grey lighten-1">
 		<div class="footer-copyright green darken-5">
@@ -121,5 +185,10 @@
 		//Menu Mobile
 		$(".button-collapse").sideNav();
 	</script>
+		<script type="text/javascript"> 
+	  	$(document).ready(function() {
+	    	$('select').material_select();
+	  	});
+  	</script>
 </body>
 </html>

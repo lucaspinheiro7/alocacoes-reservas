@@ -1,7 +1,13 @@
 package br.com.fametro.model.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -185,4 +191,119 @@ public class ProfessorService {
 		
 		return turma;
 	}
+
+	public Laboratorio buscarPorNumero(Laboratorio laboratorio) {
+		
+		List<Laboratorio> todosLabs = labDAO.buscarTodos();
+		//Busca todas os laboratorios do banco
+		
+		for (Laboratorio l : todosLabs){
+
+			if (laboratorio.getNumero() == l.getNumero()){
+				//Verifica qual laboratorio tem o mesmo numero do que foi passao por parametro
+				
+				laboratorio.setId(l.getId());
+				laboratorio.setNumero(l.getNumero());
+				laboratorio.setCapacidade(l.getCapacidade());
+				laboratorio.setStatus(l.getStatus());
+				//passa os atributos do laboratorio encontrada para o objeto que sera retornado
+
+				break;	
+			}
+			
+		}
+		
+		return laboratorio;
+	}
+
+	public List<Laboratorio> buscarLabsDisponiveis(){
+		
+		List<Laboratorio> todosLabs = labDAO.buscarTodos();
+		List<Laboratorio> labsDisponiveis = new ArrayList<Laboratorio>();
+		
+		for (Laboratorio l : todosLabs){
+			
+			if (l.getStatus().equals("disponível")){
+				
+				labsDisponiveis.add(l);
+				
+			}
+			
+		}
+		
+		return labsDisponiveis;
+	}	
+
+	public List<ReservaLab> buscarReservasPorLab(Laboratorio lab){
+		
+		List<ReservaLab> todasReservas = reservaLabDAO.buscarTodos();
+		List<ReservaLab> reservasLab = new ArrayList<ReservaLab>();
+		
+		for (ReservaLab r : todasReservas){
+			
+			if (r.getLaboratorio().getNumero() == lab.getNumero()){
+				
+				reservasLab.add(r);
+				
+			}
+		}
+		
+		return reservasLab;
+	}
+		
+	public Map<String, Object> reservarLab(Laboratorio lab, ReservaLab reservaLab, Professor prof) throws ParseException{
+		
+		Date hoje = new Date();
+		
+		String msgError = "RESERVA NÃO REALIZADA: DATA ULTRAPASSADA!";
+		String msgSucess = null;
+		
+		Map<String, Object> mensagens = new HashMap<String, Object>();
+		
+		List<ReservaLab> todasReservas = buscarReservasPorLab(lab);
+		
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		hoje = format.parse(format.format(hoje));
+		//Formatação necessária para zerar o horario e focar apenas na data
+		
+		if (reservaLab.getDataReserva().compareTo(hoje) >= 0){
+			//Verifica se data selecionada está ultrapassada
+			
+			for(ReservaLab r : todasReservas){
+				
+				if (r.getDataReserva().getTime() == reservaLab.getDataReserva().getTime()){
+					//verifica se já existe uma reserva para a data solicitada
+					
+					msgError = "RESERVA NÃO REALIZADA: JÁ EXISTE UMA RESERVA PARA ESTA DATA";
+					
+					mensagens.put("msgSucess", msgSucess);
+					mensagens.put("msgError", msgError);
+					
+					return mensagens;
+					
+				}
+				
+			}
+			
+			
+			msgSucess = "RESERVA REALIZADA COM SUCESSO!";
+			msgError = null;
+			
+			lab = buscarPorNumero(lab);
+			reservaLab.setLaboratorio(lab);
+			reservaLab.setProfessor(prof);
+			reservaLabDAO.salvar(reservaLab);
+			
+			mensagens.put("msgSucess", msgSucess);
+			mensagens.put("msgError", msgError);
+			
+		}
+		
+		mensagens.put("msgSucess", msgSucess);
+		mensagens.put("msgError", msgError);
+		
+		return mensagens;
+	}
+
 }
+
